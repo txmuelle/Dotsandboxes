@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package ch.hslu.prg2.view;
 
 /**
  *
  * @author Müller Urs
  */
-public class RandomKI {
+public class GUI {
     
 }

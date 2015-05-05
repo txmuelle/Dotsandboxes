@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hslu.prg2.controlling;
+package ch.hslu.prg2.model;
 
 /**
  *
  * @author Müller Urs
  */
-public class DotsandBoxes {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class GameModel {
     
 }
