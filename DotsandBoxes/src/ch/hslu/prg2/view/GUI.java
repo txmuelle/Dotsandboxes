@@ -7,9 +7,10 @@ package ch.hslu.prg2.view;
 
 /**
  *
- * @author Müller Urs
+ * @author 
  */
 public class GUI {
     
     private final int x = 0;
+    private final int yourPenis=0;
 }
