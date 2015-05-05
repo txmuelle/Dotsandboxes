@@ -9,6 +9,6 @@ package ch.hslu.prg2.model;
  *
  * @author Müller Urs
  */
-public class NewClass {
+public interface IBoard {
     
 }

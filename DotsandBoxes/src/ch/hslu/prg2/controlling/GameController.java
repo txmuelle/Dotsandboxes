@@ -5,18 +5,23 @@
  */
 package ch.hslu.prg2.controlling;
 
+import ch.hslu.prg2.model.IBoard;
+import ch.hslu.prg2.model.PlayerColor;
+
 /**
  *
  * @author Müller Urs
  */
-public class GameController {
+public class GameController implements IPlayerActionController {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        //Guguisäli
+    @Override
+    public void setStripe(int xposition, int yposition, PlayerColor player) {
+        
+    }
+
+    @Override
+    public void setResetBoard(IBoard board, PlayerColor player) {
+        
     }
     
 }
