@@ -157,7 +157,7 @@ public class GUI extends JFrame implements IModelObserver {
                 ImageIcon playerIcon2;
                 
                
-                    playerIcon2= new ImageIcon("images\\player_computer.png");
+                    playerIcon2= new ImageIcon("images\\player_blue.png");
                 
                 
                 Image icon1 = playerIcon2.getImage();
