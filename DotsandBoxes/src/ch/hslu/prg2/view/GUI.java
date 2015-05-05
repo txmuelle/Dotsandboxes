@@ -37,7 +37,6 @@ public class GUI extends JFrame implements IModelObserver {
     JMenu menuHelp = new JMenu("Help");
     JMenu miFileNew = new JMenu("New Game");
     JMenuItem miFileNewEasy = new JMenuItem("Easy");
-    JMenuItem miFileNewSimple = new JMenuItem("Simple");
     JMenuItem miFileNewHard = new JMenuItem("Hard");
     JMenuItem miFileLoad = new JMenuItem("Load Game");
     JMenuItem miFileSave = new JMenuItem("Save Game");
@@ -143,20 +142,7 @@ public class GUI extends JFrame implements IModelObserver {
                 ImageIcon playerIcon1 = new ImageIcon("images\\player_red.png");
                 Image icon1 = playerIcon1.getImage();
                 g.drawImage(icon1, 10, 50, rootPane);
-                if(gameModel.isGameOver()){
-                    if(gameModel.getWinner() == PlayerColor.Red){
-                        g.setColor(Color.red);
-                        g.drawString("Winner!", 20, 200);
-                    }
-                }
-                else
-                {
-                    if(gameModel.getCurrentPlayer() == PlayerColor.Red)
-                    {
-                        g.setColor(Color.red);
-                        g.drawString("Is on turn", 20, 200);
-                    }
-                }
+                
             }
         };
         
@@ -167,32 +153,16 @@ public class GUI extends JFrame implements IModelObserver {
                 
                 g.setFont(playerFont);
                 g.setColor(Color.black);
-                g.drawString("Yellow Player", 20, 30);
+                g.drawString("Blue Player", 20, 30);
                 ImageIcon playerIcon2;
                 
-                if(gameModel.getVariant()== GameVariant.local){
+               
                     playerIcon2= new ImageIcon("images\\player_computer.png");
-                }
-                else{
-                    playerIcon2 = new ImageIcon("images\\player_yellow.png");
-                }
+                
                 
                 Image icon1 = playerIcon2.getImage();
                 g.drawImage(icon1, 10, 50, rootPane);
-                if(gameModel.isGameOver()){
-                    if(gameModel.getWinner() == PlayerColor.Blue){
-                        g.setColor(Color.orange);
-                        g.drawString("Winner!", 20, 200);
-                    }
-                }
-                else
-                {
-                    if(gameModel.getCurrentPlayer() == PlayerColor.Blue)
-                    {
-                        g.setColor(Color.orange);
-                        g.drawString("Is on turn", 20, 200);
-                    }
-                }
+                
             }
         };
         
@@ -214,13 +184,31 @@ public class GUI extends JFrame implements IModelObserver {
         //set Layout Manager
         setLayout(new BorderLayout(5, 5));
         
+                //Display 1 (Panel aussen)
+        add(display1, BorderLayout.CENTER);
+        this.display1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        this.display1.add(placeholder1, BorderLayout.WEST);
+        this.placeholder1.setPreferredSize(new Dimension(150, 500));
+        this.display1.add(display2, BorderLayout.CENTER);
+        this.display2.setPreferredSize(new Dimension(600, 500));
+        this.display1.add(placeholder2, BorderLayout.EAST);
+        this.placeholder2.setPreferredSize(new Dimension(150, 500)); 
+         
+        //Display 2 (Panel innen)    
+        this.display2.add(placeholder3, BorderLayout.NORTH);
+        this.placeholder3.setPreferredSize(new Dimension(600, 50));
+
+        //Play Board
+        this.display2.add(playBoard, BorderLayout.CENTER);
+        this.playBoard.setPreferredSize(new Dimension(600, 400));
+        this.playBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        
     }
 
     private void setMenuBar() {
         
         this.menuFile.add(miFileNew);
             this.miFileNew.add(miFileNewEasy);
-            this.miFileNew.add(miFileNewSimple);
             this.miFileNew.add(miFileNewHard);
         this.menuFile.add(miFileLoad);
         this.menuFile.add(miFileSave);
