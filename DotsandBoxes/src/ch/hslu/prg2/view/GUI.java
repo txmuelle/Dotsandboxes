@@ -5,13 +5,11 @@
  */
 package ch.hslu.prg2.view;
 
-import ch.hslu.prg2.controlling.GameController;
-import ch.hslu.prg2.controlling.GameManager;
+import ch.hslu.prg2.controlling.Controller;
+
 import javax.swing.JFrame;
 import java.awt.*;
 import javax.swing.*;
-import ch.hslu.prg2.controlling.IGameManager;
-import ch.hslu.prg2.controlling.IPlayerActionController;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.IGameField;
 import ch.hslu.prg2.model.Player;
@@ -76,13 +74,13 @@ public class GUI extends JFrame {
     /**
      * Konstruktor des GUI's
      *
-     * @param gameModel
-     * @param playerActionController
-     * @param gameManager
-     * @param uiPlayer The color of the human player that uses this GUI.
+     * @param model
+     * @param gameController
+     * @param controller
+     * @param Player
      * @param gameVariant
      */
-    public GUI(IGameField gameField, IPlayerActionController playerActionController, IGameManager gameManager, Player uiPlayer) {
+    public GUI(Model model, Controller controller, Player Player, GameVariant gameVariant) {
         //intial Frame
         super("Dots and Boxes");
 
