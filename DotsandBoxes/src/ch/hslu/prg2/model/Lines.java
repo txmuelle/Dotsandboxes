@@ -57,4 +57,8 @@ public class Lines {
         this.column = column;
     }
     
+    public boolean isEmpty(){
+        return owner == null;
+    }
+    
 }
