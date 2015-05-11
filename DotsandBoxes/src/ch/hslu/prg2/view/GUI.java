@@ -12,7 +12,7 @@ import java.awt.*;
 import javax.swing.*;
 import ch.hslu.prg2.controlling.IGameManager;
 import ch.hslu.prg2.controlling.IPlayerActionController;
-import ch.hslu.prg2.model.GameModel;
+import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.IGameModelInformer;
 import ch.hslu.prg2.model.IModelObserver;
 import ch.hslu.prg2.model.PlayerColor;
