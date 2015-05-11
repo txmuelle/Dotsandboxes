@@ -17,11 +17,13 @@ public class Controller {
     
     private GUI gui;
     private GameField field;
-    private Player player;
+    private Player player1;
+    private Player player2;
     
-    public Controller(int size){
-        field = new GameField(size);
-        gui = new GUI();
+    public Controller(){
+        field = new GameField();
+        player1 = new Player();
+        player2 = new Player();
     }
     
     public void setLine(int row, int colum, Player player){
@@ -53,7 +55,12 @@ public class Controller {
         }
     }
     
+    public void newGame(int size){
+        
+    }
+    
     public static void main(String[] args){
-        Controller controller = new Controller (5);
+        GUI gui = new GUI();
+        Controller controller = new Controller();
     }
 }
