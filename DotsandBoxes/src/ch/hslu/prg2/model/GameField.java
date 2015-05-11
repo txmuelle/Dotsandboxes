@@ -103,7 +103,10 @@ public class GameField implements IGameField {
         }
     }
  
-    
+    public boolean isBoxFull(int row,int column){
+        int counter = boxmatrix[row][column].getCounter();
+        return (counter == 4);
+    }
     public static void main(String [] args){
         GameField g = new GameField(2);
         Player p = new Player("Lucius", Color.BLACK);
