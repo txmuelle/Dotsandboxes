@@ -13,22 +13,20 @@ import javax.swing.*;
 import ch.hslu.prg2.controlling.IGameManager;
 import ch.hslu.prg2.controlling.IPlayerActionController;
 import ch.hslu.prg2.model.GameField;
-import ch.hslu.prg2.model.IGameModelInformer;
-import ch.hslu.prg2.model.IModelObserver;
-import ch.hslu.prg2.model.PlayerColor;
-import ch.hslu.prg2.model.GameVariant;
+import ch.hslu.prg2.model.IGameField;
+import ch.hslu.prg2.model.Player;
+
 
 /**
  *
  * @author Urs Müller
  */
-public class GUI extends JFrame implements IModelObserver {
+public class GUI extends JFrame {
 
-    private IGameModelInformer gameModel;
+    private GameField gameField;
     private final IPlayerActionController playerActionController;
     private final IGameManager gameManager;
-    private final GameVariant gameVariant;
-    private PlayerColor uiPlayerColor;
+    private Player Player;
 
     //Layout MenuBar
     JMenuBar menuBar = new JMenuBar();
@@ -81,21 +79,21 @@ public class GUI extends JFrame implements IModelObserver {
      * @param gameModel
      * @param playerActionController
      * @param gameManager
-     * @param uiPlayerColor The color of the human player that uses this GUI.
+     * @param uiPlayer The color of the human player that uses this GUI.
      * @param gameVariant
      */
-    public GUI(IGameModelInformer gameModel, IPlayerActionController playerActionController, IGameManager gameManager, PlayerColor uiPlayerColor, GameVariant gameVariant) {
+    public GUI(IGameField gameField, IPlayerActionController playerActionController, IGameManager gameManager, Player uiPlayer) {
         //intial Frame
         super("Dots and Boxes");
 
         // closing the main window should dispose of it, allowing VM to exit
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        this.gameModel = gameModel;
+        this.gameField = gameField;
         this.playerActionController = playerActionController;
         this.gameManager = gameManager;
-        this.uiPlayerColor = uiPlayerColor;
-        this.gameVariant = gameVariant;
+        this.Player = uiPlayer;
+      
 
         //playboard  und Frame zeichnen
         paintPlayBoard();
@@ -112,7 +110,7 @@ public class GUI extends JFrame implements IModelObserver {
     }
 
     public void setPlayerColor(PlayerColor uiPlayerColor) {
-        this.uiPlayerColor = uiPlayerColor;
+        this.Player = uiPlayerColor;
     }
 
     @Override
