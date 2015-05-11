@@ -16,11 +16,15 @@ public class Boxes {
     private int counter;
     private Player owner;
     private Color boxColor;
+    private int row;
+    private int column;
     
-    public Boxes(){
+    public Boxes(int row, int column){
         this.owner = null;
         this.boxColor = null;
         this.counter = 0;
+        this.row = row;
+        this.column = column;
     }
    
     public int getCounter(){
@@ -35,6 +39,14 @@ public class Boxes {
         return boxColor;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
     public void setCounter(int counter) {
         this.counter = counter;
     }
@@ -46,5 +58,14 @@ public class Boxes {
     public void setBoxColor(Color boxColor) {
         this.boxColor = boxColor;
     }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+    
     
 }

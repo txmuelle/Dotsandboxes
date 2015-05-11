@@ -29,36 +29,51 @@ public class GameField implements IGameField {
         matrixSize = (size * 2 + 1);
         linematrix = new Lines [matrixSize][matrixSize];
         boxmatrix = new Boxes [matrixSize][matrixSize];
+        fillLineMatrix();
+        fillBoxMatrix();
     }
     
     
     public void fillLineMatrix(){
-       //Füllen der Matrix horizontal
+    
             for(int rows = 0; rows < matrixSize; rows++){
                 if(rows % 2 == 0){
-                    int columns = 0;
-                    while(rows < matrixSize){
+                    int columns = 1;
+                    while(columns < matrixSize - 1){
                         linematrix[rows][columns] = new Lines(rows, columns);
+                        columns += 2;
                     }
                 }
                 else{
+                    int columns = 0;
+                    while(columns < matrixSize){
+                        linematrix[rows][columns] = new Lines (rows, columns);
+                        columns += 2;
+                    }
                     
                 }
             }
-
-       //Füllen der Matrix vertikal
-        
-
     }
     
     
     public void fillBoxMatrix(){
+            for(int rows = 1; rows < matrixSize - 1; rows = rows + 2){
+                   for(int columns = 1; columns < matrixSize - 1; columns = columns + 2){
+                       boxmatrix [rows][columns] = new Boxes(rows, columns);
+                   }
+                
+            }
         
         
     }
     
+    public int getMatrixSize(){
+        return matrixSize;
+    }
     
-    
-   
-    
+   public static void main(String [] args){
+       GameField g = new GameField(4);
+       System.out.println(g.boxmatrix.toString() + " " + g.linematrix.toString());
+   }
+      
 }
