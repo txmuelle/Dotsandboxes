@@ -75,7 +75,7 @@ public class GameField implements IGameField {
     }
     
  
-    /*
+    
     public static void main(String [] args){
         GameField g = new GameField(1);
         Player p = new Player("Lucius", Color.BLACK);
@@ -84,5 +84,5 @@ public class GameField implements IGameField {
         System.out.println(g.isLineDrawed(1, 2));
         System.out.println(g.isLineDrawed(3, 0));
     }
-    */
+    
 }
