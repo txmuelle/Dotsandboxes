@@ -14,6 +14,7 @@ import ch.hslu.prg2.view.GUI;
 public class Controller {
     
     public Controller(){
+        p
         
     }
     
