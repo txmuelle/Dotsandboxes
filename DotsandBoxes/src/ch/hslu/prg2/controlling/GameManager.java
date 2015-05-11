@@ -5,7 +5,7 @@
  */
 package ch.hslu.prg2.controlling;
 
-import ch.hslu.prg2.model.GameModel;
+import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.GameVariant;
 import ch.hslu.prg2.model.IBoard;
 import ch.hslu.prg2.model.PlayerColor;
@@ -23,7 +23,7 @@ import java.net.InetAddress;
 public class GameManager implements IGameManager {
     
     private IBoard board;
-    private GameModel model;
+    private GameField model;
     private GameController gameController;
     private GUI gui;
     private GameVariant gameVariant;
