@@ -6,10 +6,6 @@
 package ch.hslu.prg2.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * Erstellt das Spielfeld mit zwei 2d Array für Lines und Boxes
  * Füllt leere Matrix mit Lines und Boxes Objekten.
@@ -51,8 +47,8 @@ public class GameField implements IGameField {
                         columns += 2;
                     }
                     
-                }
             }
+        }
     }
     
     
@@ -62,18 +58,31 @@ public class GameField implements IGameField {
                        boxmatrix [rows][columns] = new Boxes(rows, columns);
                    }
                 
-            }
-        
-        
+            }  
     }
+    
+    public void setLine(int row, int column, Player p){
+        linematrix[row][column].setOwner(p);
+    }
+    
     
     public int getMatrixSize(){
         return matrixSize;
     }
     
-   public static void main(String [] args){
-       GameField g = new GameField(4);
-       System.out.println(g.boxmatrix.toString() + " " + g.linematrix.toString());
-   }
-      
+    public boolean isLineDrawed(int row, int column){
+        return !linematrix[row][column].isEmpty();
+    }
+    
+ 
+    /*
+    public static void main(String [] args){
+        GameField g = new GameField(1);
+        Player p = new Player("Lucius", Color.BLACK);
+        g.linematrix[1][2].setOwner(p);
+        g.linematrix[3][0].setOwner(p);
+        System.out.println(g.isLineDrawed(1, 2));
+        System.out.println(g.isLineDrawed(3, 0));
+    }
+    */
 }
