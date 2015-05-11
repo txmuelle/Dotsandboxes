@@ -55,15 +55,29 @@ public class GUI extends JFrame implements IModelObserver {
     private JPanel display2 = new JPanel(new BorderLayout());
     private JPanel placeholder3 = new JPanel(new GridLayout(1, 7));
     private JPanel playBoard;
-    
+
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
- 
-    
 
-    
-     /**
+    // gameplay instructions
+    final String HOWTOPLAYTEXT = "How To Play\r\n" + "\r\n"
+            + "The game consists of a field of dots.  Take turns with the\r\n"
+            + "computer adding lines between the dots.  Complete a box to\r\n"
+            + "get another turn.  Your boxes will show O.  The computer's\r\n"
+            + "boxes get X.  Complete the most boxes to win!\r\n";
+
+    // about box text
+    final String ABOUTTEXT = "Dots and Boxes is a Java program written by "
+            + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli Adrian\r\n"
+            + "\r\n"
+            + "This was a project in PRG2 \r\n"
+            + "Hochschule Luzern \r\n"
+            + "FS15\r\n"
+            + "\r\n";
+
+    /**
      * Konstruktor des GUI's
+     *
      * @param gameModel
      * @param playerActionController
      * @param gameManager
@@ -74,31 +88,28 @@ public class GUI extends JFrame implements IModelObserver {
         //intial Frame
         super("Dots and Boxes");
 
+        // closing the main window should dispose of it, allowing VM to exit
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         this.gameModel = gameModel;
         this.playerActionController = playerActionController;
         this.gameManager = gameManager;
         this.uiPlayerColor = uiPlayerColor;
         this.gameVariant = gameVariant;
 
-                
         //playboard  und Frame zeichnen
         paintPlayBoard();
- 
-        
+
         //MenuBar
-        
         setMenuBar();
-        
-        
-         //ActionListner registrieren
+
+        //ActionListner registrieren
         register();
 
         //Sichtbar machen
-       
         //pack();
         setVisible(true);
     }
-
 
     public void setPlayerColor(PlayerColor uiPlayerColor) {
         this.uiPlayerColor = uiPlayerColor;
@@ -112,79 +123,77 @@ public class GUI extends JFrame implements IModelObserver {
     }
 
     private void paintPlayBoard() {
-        
-        this.playBoard = new JPanel(){
-        
+
+        this.playBoard = new JPanel() {
+
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g); 
-                 placeholder1.repaint();
-                 placeholder2.repaint();
-                
+                super.paintComponent(g);
+                placeholder1.repaint();
+                placeholder2.repaint();
+
                 //Rendering einstellen
-                Graphics2D g2 = (Graphics2D)g;
+                Graphics2D g2 = (Graphics2D) g;
                 RenderingHints rh = new RenderingHints(
-                         RenderingHints.KEY_ANTIALIASING,
-                         RenderingHints.VALUE_ANTIALIAS_ON);
+                        RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setRenderingHints(rh);
 
             }
         };
-        
-        this.placeholder1 = new JPanel(){
+
+        this.placeholder1 = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g); 
-                
+                super.paintComponent(g);
+
                 g.setFont(playerFont);
                 g.setColor(Color.black);
                 g.drawString("Red Player", 20, 30);
                 ImageIcon playerIcon1 = new ImageIcon("images\\player_red.png");
                 Image icon1 = playerIcon1.getImage();
                 g.drawImage(icon1, 10, 50, rootPane);
-                
+
             }
         };
-        
-        this.placeholder2 = new JPanel(){
+
+        this.placeholder2 = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g); 
-                
+                super.paintComponent(g);
+
                 g.setFont(playerFont);
                 g.setColor(Color.black);
                 g.drawString("Blue Player", 20, 30);
                 ImageIcon playerIcon2;
-                
-               
-                    playerIcon2= new ImageIcon("images\\player_blue.png");
-                
-                
+
+                playerIcon2 = new ImageIcon("images\\player_blue.png");
+
                 Image icon1 = playerIcon2.getImage();
                 g.drawImage(icon1, 10, 50, rootPane);
-                
+
             }
         };
-        
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 700);
         setResizable(false);
-        
+
         //Frame Location
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (dim.width - super.getSize().width)/2;
-        int y = (dim.height - super.getSize().height)/2;
+        int x = (dim.width - super.getSize().width) / 2;
+        int y = (dim.height - super.getSize().height) / 2;
         super.setLocation(x, y);
-        
+
         //set Icon 
         ImageIcon logoIcon = new ImageIcon("images\\logo.png");
         Image logo = logoIcon.getImage();
         super.setIconImage(logo);
-        
+
         //set Layout Manager
         setLayout(new BorderLayout(5, 5));
-        
-                //Display 1 (Panel aussen)
+
+        //Display 1 (Panel aussen)
         add(display1, BorderLayout.CENTER);
         this.display1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         this.display1.add(placeholder1, BorderLayout.WEST);
@@ -192,8 +201,8 @@ public class GUI extends JFrame implements IModelObserver {
         this.display1.add(display2, BorderLayout.CENTER);
         this.display2.setPreferredSize(new Dimension(600, 500));
         this.display1.add(placeholder2, BorderLayout.EAST);
-        this.placeholder2.setPreferredSize(new Dimension(150, 500)); 
-         
+        this.placeholder2.setPreferredSize(new Dimension(150, 500));
+
         //Display 2 (Panel innen)    
         this.display2.add(placeholder3, BorderLayout.NORTH);
         this.placeholder3.setPreferredSize(new Dimension(600, 50));
@@ -202,33 +211,33 @@ public class GUI extends JFrame implements IModelObserver {
         this.display2.add(playBoard, BorderLayout.CENTER);
         this.playBoard.setPreferredSize(new Dimension(600, 400));
         this.playBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        
+
     }
 
     private void setMenuBar() {
-        
+
         this.menuFile.add(miFileNew);
-            this.miFileNew.add(miFileNewEasy);
-            this.miFileNew.add(miFileNewHard);
+        this.miFileNew.add(miFileNewEasy);
+        this.miFileNew.add(miFileNewHard);
         this.menuFile.add(miFileLoad);
         this.menuFile.add(miFileSave);
         this.menuFile.addSeparator();
         this.menuFile.add(miFileExit);
         this.menuBar.add(menuFile);
-        
+
         this.menuGame.add(miGameHost);
         this.menuGame.add(miGameJoin);
         this.menuGame.add(miUDPGameHost);
         this.menuGame.add(miUDPGameSearch);
         this.menuBar.add(menuGame);
-        
+
         this.menuHelp.add(miHelpAbout);
         this.menuBar.add(menuHelp);
-        
+
         setJMenuBar(menuBar);
     }
 
     private void register() {
-        
+
     }
 }
