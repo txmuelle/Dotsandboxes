@@ -14,7 +14,6 @@ import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.IGameField;
 import ch.hslu.prg2.model.Player;
 
-
 /**
  *
  * @author Urs Müller
@@ -49,7 +48,7 @@ public class GUI extends JFrame {
     private JPanel display2 = new JPanel(new BorderLayout());
     private JPanel placeholder3 = new JPanel(new GridLayout(1, 7));
     private JPanel playBoard;
-    
+
     //Playboard
     private int rows;
     private int cols;
@@ -57,7 +56,7 @@ public class GUI extends JFrame {
 
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
-    
+
     // gameplay instructions
     final String HOWTOPLAYTEXT = "How To Play\r\n" + "\r\n"
             + "The game consists of a field of dots.  Take turns with the\r\n"
@@ -94,7 +93,6 @@ public class GUI extends JFrame {
         this.gameField = gameField;
         this.controller = controller;
         this.Player = Player;
-      
 
         //playboard  und Frame zeichnen
         paintPlayBoard();
@@ -110,13 +108,12 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
-    public GUI(){
-            //intial Frame
+    public GUI() {
+        //intial Frame
         super("Dots and Boxes");
 
         // closing the main window should dispose of it, allowing VM to exit
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
 
         //playboard  und Frame zeichnen
         this.rows = 6;
@@ -132,8 +129,9 @@ public class GUI extends JFrame {
         //Sichtbar machen
         //pack();
         setVisible(true);
-    
+
     }
+
     public void setPlayerColor(Player Player) {
         this.Player = Player;
     }
@@ -179,70 +177,82 @@ public class GUI extends JFrame {
 
             }
         };
-        
-        
-        
-        this.playBoard = new JPanel(){
-                private final int lineThickness = 0x2;
-                private Color dotColor = Color.BLACK; 
-                
-            protected void paintComponent(Graphics g){
-                super.paintComponent(g);
-                
-                    //Line and Dots
-    
 
-                
-                /*               // DRAW LINES
-                // half the thickness of a line
-                int halfThick = this.lineThickness / 2;
-                // iterate over lines (two for every dot, except lower right dot)
-                for (int row = 0; row <= this.rows; row++) {
-                int y = this.origin.y + row * boxL;
-                for (int col = 0; col <= this.cols; col++) {
-                int x = this.origin.x + col * boxL;
-                // not rightmost column, so draw horizontal line
-                if (col != this.cols) {
-                // line objects
-                Line hor = this.line[Line.HORIZONTAL][col][row];
-                // horizontal line is visible
-                if (hor.isVisible()) {
-                g.setColor(hor.getColor());
-                g.fillRect(x, y - halfThick, boxL, this.lineThickness);
-                }
-                }
-                // not lowest row, so draw vertical line
-                if (row != this.rows) {
-                Line ver = this.line[Line.VERTICAL][col][row];
-                // vertical line is visible
-                if (ver.isVisible()) {
-                g.setColor(ver.getColor());
-                g.fillRect(x - halfThick, y, this.lineThickness, boxL);
-                }
-                }
-                }
-                }*/
-		// DRAW DOTS
-		g.setColor(this.dotColor);
-		// half the dot size
-		//Die Kreise zeichen und jenach Spielverlauf einfärben
-                for (int y = cols; y >= 0; y--)
-                {
-                    for (int x = 0; x < rows; x++)
-                    {
-           
+        this.playBoard = new JPanel() {
+            private final int lineThickness = 0x2;
+            private Color dotColor = Color.BLACK;
+
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                 
+                //Draw Senkrechte Striche
+                for (int y = cols - 1; y > 0; y--) {
+                    for (int x = 0; x < rows; x++) {
+
                         //Kreise mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
+                        g.setColor(Color.LIGHT_GRAY);
 
-                        g.setColor(Color.black);
-
-                        g.fillArc(((int)x*100)+10, ((int)(y*-100)+500)+15, 10, 10, 0, 360);
+                        g.fillRect(((int) x * 100) + 13, ((int) (y * -100) + 500) + 35, 5, 70);
                     }
                 }
-            
+                //Draw Waagrechte Striche 
+                for (int y = cols; y >= 0; y--) {
+                    for (int x = 0; x < rows - 1; x++) {
+
+                        //Kreise mit der richtigen Farbe füllen
+                        //Player player = GameField.getGridPosition(x, y);
+                        g.setColor(Color.LIGHT_GRAY);
+
+                        g.fillRect(((int) x * 100) + 33, ((int) (y * -100) + 500) + 18, 70, 5);
+                    }
+                }
+
+                //Draw Boxes
+                g.setColor(this.dotColor);
+                //Die Boxen zeichen und jenach Spielverlauf einfärben X O
+                for (int y = cols - 1; y > 0; y--) {
+                    for (int x = 0; x < rows - 1; x++) {
+                        
+                        boolean redplayer = false;
+                        //Kreise mit der richtigen Farbe füllen
+                        //Player player = GameField.getGridPosition(x, y);
+                        if (redplayer) {
+                            g.setColor(Color.red);
+
+                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
+                            g.setColor(getBackground());
+                            g.fillArc(((int) x * 100) + 35, ((int) (y * -100) + 500) + 35, 60, 60, 0, 360);
+                        }
+                        else{
+                        
+                            g.setColor(Color.red);
+
+                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
+                            g.setColor(getBackground());
+                            g.fillArc(((int) x * 100) + 35, ((int) (y * -100) + 500) + 35, 60, 60, 0, 360);
+                        }
+                    }
+                }
+
+                // DRAW DOTS
+                g.setColor(this.dotColor);
+		// half the dot size
+                //Die Kreise zeichen und jenach Spielverlauf einfärben
+                for (int y = cols; y >= 0; y--) {
+                    for (int x = 0; x < rows; x++) {
+
+                        //Kreise mit der richtigen Farbe füllen
+                        //Player player = GameField.getGridPosition(x, y);
+                        g.setColor(Color.black);
+
+                        g.fillArc(((int) x * 100) + 10, ((int) (y * -100) + 500) + 15, 10, 10, 0, 360);
+                    }
+                }
+
             }
-              
-        
+
         };
 
         this.placeholder2 = new JPanel() {
@@ -328,10 +338,10 @@ public class GUI extends JFrame {
     private void register() {
 
     }
-    
-    public static void main(String [] Args){
-    
+
+    public static void main(String[] Args) {
+
         GUI a = new GUI();
     }
-    
+
 }
