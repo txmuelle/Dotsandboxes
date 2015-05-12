@@ -64,17 +64,17 @@ public class GameField implements IGameField {
     }
     
     public void setLine(int row, int column, Player p){
-        linematrix[row][column].setOwner(p);
+        linematrix[row][column].setOwner(p);}
         //Setzen des Counters ,der von der Linie abhänigigen Boxen. 
-        if(row %2 == 0){//  Überprüfung, ob eine horizontale Linie ist.
-            checkBoxes(row-1,column,p);
-            checkBoxes(row+1,column,p);   
-        }else{
-            checkBoxes(row,column-1,p);
-            checkBoxes(row,column+1,p);
-        }
-    
-    }
+//        if(row %2 == 0){//  Überprüfung, ob eine horizontale Linie ist.
+//            checkBoxes(row-1,column,p);
+//            checkBoxes(row+1,column,p);   
+//        }else{
+//            checkBoxes(row,column-1,p);
+//            checkBoxes(row,column+1,p);
+//        }
+//    
+//    }
     
     
     public int getMatrixSize(){
@@ -89,39 +89,39 @@ public class GameField implements IGameField {
         gesetzt.
     
     */
-    public void checkBoxes(int row,int column,Player p){
-        if(row > 0 && row < matrixSize-1 && column>0 && column<matrixSize-1){
-            Boxes box = boxmatrix[row][column];
-            int counter = box.getCounter()+1;
-            box.setCounter(counter);
-            //Überprüfen, ob Quadrat geschlossen ist
-            if(counter==4){
-               box.setOwner(p);
-               box.setBoxColor(p.getColor());
-               p.setScore(p.getScore()+1);
-            }
-        }
-    }
+//    public void checkBoxes(int row,int column,Player p){
+//        if(row > 0 && row < matrixSize-1 && column>0 && column<matrixSize-1){
+//            Boxes box = boxmatrix[row][column];
+//            int counter = box.getCounter()+1;
+//            box.setCounter(counter);
+//            //Überprüfen, ob Quadrat geschlossen ist
+//            if(counter==4){
+//               box.setOwner(p);
+//               box.setBoxColor(p.getColor());
+//               p.setScore(p.getScore()+1);
+//            }
+//        }
+//    }
  
     public boolean isBoxFull(int row,int column){
         int counter = boxmatrix[row][column].getCounter();
         return (counter == 4);
     }
-    public static void main(String [] args){
-        GameField g = new GameField(2);
-        Player p = new Player("Lucius", Color.BLACK);
-        g.linematrix[3][0].setOwner(p);
-        System.out.println(g.isLineDrawed(3, 0));
-        g.setLine(0, 1, p);
-        g.setLine(1, 2, p);
-        Boxes b1= g.boxmatrix[1][1];
-        Boxes b2= g.boxmatrix[1][3];
-        System.out.println(b1.getCounter());
-        g.setLine(2,1, p);
-        g.setLine(1,0, p);
-        System.out.println(b1.getCounter());
-        System.out.println(b2.getCounter());
-        System.out.println(b1.getOwner());
-    }
+//    public static void main(String [] args){
+//        GameField g = new GameField(2);
+//        Player p = new Player("Lucius", Color.BLACK);
+//        g.linematrix[3][0].setOwner(p);
+//        System.out.println(g.isLineDrawed(3, 0));
+//        g.setLine(0, 1, p);
+//        g.setLine(1, 2, p);
+//        Boxes b1= g.boxmatrix[1][1];
+//        Boxes b2= g.boxmatrix[1][3];
+//        System.out.println(b1.getCounter());
+//        g.setLine(2,1, p);
+//        g.setLine(1,0, p);
+//        System.out.println(b1.getCounter());
+//        System.out.println(b2.getCounter());
+//        System.out.println(b1.getOwner());
+//    }
     
 }
