@@ -20,7 +20,7 @@ public class Lines {
     
     public Lines(int row, int column){
         this.owner = null;
-        this.color = null;
+        this.color = Color.LIGHT_GRAY;
         this.row = row;
         this.column = column;
     }
@@ -29,7 +29,7 @@ public class Lines {
         return owner;
     }
 
-    public Color getColor() {
+    public Color getLineColor() {
         return color;
     }
 

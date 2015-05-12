@@ -5,10 +5,25 @@
  */
 package ch.hslu.prg2.model;
 
+import java.awt.Color;
+
 /**
  *
  * @author luciusschaerer
  */
 public interface IGameField {
+    
+    public void setLine(int row, int column, Player p);
+    
+    public int getMatrixSize();
+    
+    public Color getBoxColor(int row, int column);
+    
+    public Color getLineColor(int row, int column);
+    
+    public boolean isLineDrawed(int row, int column);
+    
+    public boolean isBoxFull(int row,int column);
+    
     
 }

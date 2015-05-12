@@ -18,7 +18,7 @@ public class Player
     private String name;
     private Color color;
     private int score = 0;
-    private boolean IsActive=false;
+    private boolean IsActive = false;
 
     
     public Player(String name, Color color){

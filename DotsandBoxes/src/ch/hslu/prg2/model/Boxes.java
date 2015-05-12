@@ -21,7 +21,7 @@ public class Boxes {
     
     public Boxes(int row, int column){
         this.owner = null;
-        this.boxColor = null;
+        this.boxColor = Color.WHITE;
         this.counter = 0;
         this.row = row;
         this.column = column;
