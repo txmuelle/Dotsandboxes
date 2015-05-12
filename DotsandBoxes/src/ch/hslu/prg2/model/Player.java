@@ -38,7 +38,7 @@ public class Player
         return color;
     }
 
-    public boolean isIsActive() {
+    public boolean getIsActive() {
         return IsActive;
     }
    
