@@ -22,8 +22,6 @@ import ch.hslu.prg2.model.Player;
 public class GUI extends JFrame {
 
     private GameField gameField;
-    private final IPlayerActionController playerActionController;
-    private final IGameManager gameManager;
     private Player Player;
 
     //Layout MenuBar
@@ -51,10 +49,15 @@ public class GUI extends JFrame {
     private JPanel display2 = new JPanel(new BorderLayout());
     private JPanel placeholder3 = new JPanel(new GridLayout(1, 7));
     private JPanel playBoard;
+    
+    //Playboard
+    private int rows;
+    private int cols;
+    private int dotSize;
 
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
-
+    
     // gameplay instructions
     final String HOWTOPLAYTEXT = "How To Play\r\n" + "\r\n"
             + "The game consists of a field of dots.  Take turns with the\r\n"
@@ -70,6 +73,7 @@ public class GUI extends JFrame {
             + "Hochschule Luzern \r\n"
             + "FS15\r\n"
             + "\r\n";
+    private Controller controller;
 
     /**
      * Konstruktor des GUI's
@@ -80,7 +84,7 @@ public class GUI extends JFrame {
      * @param Player
      * @param gameVariant
      */
-    public GUI(Model model, Controller controller, Player Player, GameVariant gameVariant) {
+    public GUI(GameField gameField, Controller controller, Player Player) {
         //intial Frame
         super("Dots and Boxes");
 
@@ -88,9 +92,8 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         this.gameField = gameField;
-        this.playerActionController = playerActionController;
-        this.gameManager = gameManager;
-        this.Player = uiPlayer;
+        this.controller = controller;
+        this.Player = Player;
       
 
         //playboard  und Frame zeichnen
@@ -107,11 +110,34 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
-    public void setPlayerColor(PlayerColor uiPlayerColor) {
-        this.Player = uiPlayerColor;
+    public GUI(){
+            //intial Frame
+        super("Dots and Boxes");
+
+        // closing the main window should dispose of it, allowing VM to exit
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+
+        //playboard  und Frame zeichnen
+        this.rows = 6;
+        this.cols = 6;
+        paintPlayBoard();
+
+        //MenuBar
+        setMenuBar();
+
+        //ActionListner registrieren
+        register();
+
+        //Sichtbar machen
+        //pack();
+        setVisible(true);
+    
+    }
+    public void setPlayerColor(Player Player) {
+        this.Player = Player;
     }
 
-    @Override
     public void update() {
 
         playBoard.repaint();
@@ -127,6 +153,7 @@ public class GUI extends JFrame {
                 super.paintComponent(g);
                 placeholder1.repaint();
                 placeholder2.repaint();
+                playBoard.repaint();
 
                 //Rendering einstellen
                 Graphics2D g2 = (Graphics2D) g;
@@ -151,6 +178,71 @@ public class GUI extends JFrame {
                 g.drawImage(icon1, 10, 50, rootPane);
 
             }
+        };
+        
+        
+        
+        this.playBoard = new JPanel(){
+                private final int lineThickness = 0x2;
+                private Color dotColor = Color.BLACK; 
+                
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                
+                    //Line and Dots
+    
+
+                
+                /*               // DRAW LINES
+                // half the thickness of a line
+                int halfThick = this.lineThickness / 2;
+                // iterate over lines (two for every dot, except lower right dot)
+                for (int row = 0; row <= this.rows; row++) {
+                int y = this.origin.y + row * boxL;
+                for (int col = 0; col <= this.cols; col++) {
+                int x = this.origin.x + col * boxL;
+                // not rightmost column, so draw horizontal line
+                if (col != this.cols) {
+                // line objects
+                Line hor = this.line[Line.HORIZONTAL][col][row];
+                // horizontal line is visible
+                if (hor.isVisible()) {
+                g.setColor(hor.getColor());
+                g.fillRect(x, y - halfThick, boxL, this.lineThickness);
+                }
+                }
+                // not lowest row, so draw vertical line
+                if (row != this.rows) {
+                Line ver = this.line[Line.VERTICAL][col][row];
+                // vertical line is visible
+                if (ver.isVisible()) {
+                g.setColor(ver.getColor());
+                g.fillRect(x - halfThick, y, this.lineThickness, boxL);
+                }
+                }
+                }
+                }*/
+		// DRAW DOTS
+		g.setColor(this.dotColor);
+		// half the dot size
+		//Die Kreise zeichen und jenach Spielverlauf einfärben
+                for (int y = cols; y >= 0; y--)
+                {
+                    for (int x = 0; x < rows; x++)
+                    {
+           
+                        //Kreise mit der richtigen Farbe füllen
+                        //Player player = GameField.getGridPosition(x, y);
+
+                        g.setColor(Color.black);
+
+                        g.fillArc(((int)x*100)+10, ((int)(y*-100)+500)+15, 10, 10, 0, 360);
+                    }
+                }
+            
+            }
+              
+        
         };
 
         this.placeholder2 = new JPanel() {
@@ -236,4 +328,10 @@ public class GUI extends JFrame {
     private void register() {
 
     }
+    
+    public static void main(String [] Args){
+    
+        GUI a = new GUI();
+    }
+    
 }
