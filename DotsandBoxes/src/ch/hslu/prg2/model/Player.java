@@ -18,6 +18,8 @@ public class Player
     private String name;
     private Color color;
     private int score = 0;
+    private boolean IsActive=false;
+
     
     public Player(String name, Color color){
         this.name = name;
@@ -35,6 +37,11 @@ public class Player
     public Color getColor(){
         return color;
     }
+
+    public boolean isIsActive() {
+        return IsActive;
+    }
+   
     
     public void setName(String name){
         this.name = name;
@@ -47,6 +54,12 @@ public class Player
     public void setScore(int score){
         this.score = score;
     }
+
+    public void setIsActive(boolean IsActive) {
+        this.IsActive = IsActive;
+    }
+    
+    
     
     public void incrementScore(){
         this.score++;
