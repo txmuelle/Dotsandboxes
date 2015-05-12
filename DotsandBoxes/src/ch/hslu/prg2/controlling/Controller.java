@@ -18,12 +18,10 @@ public class Controller {
     private GUI gui;
     private GameField field;
     private Player player1;
-    private Player player2;
     
     public Controller(){
         field = new GameField();
         player1 = new Player();
-        player2 = new Player();
     }
     
     public void setLine(int row, int colum, Player player){
