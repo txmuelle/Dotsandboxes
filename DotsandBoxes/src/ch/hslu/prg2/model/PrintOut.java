@@ -7,8 +7,7 @@ package ch.hslu.prg2.model;
 
 /**
  * Gibt die Matrix von Dots und Boxes auf die Konsole aus.
- * 
- * 
+ * Muss für weiterverwendung mit GUI oder Memory noch angepasst werden.
  * @author luciusschaerer
  */
 public class PrintOut {
