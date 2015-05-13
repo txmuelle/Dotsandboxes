@@ -21,12 +21,12 @@ public class RandomKI {
          this.gamefield = gamefield;   
         }
         
-    public void kiMove(int matrixsize, GameField gameField){
-        this.gamefield = gamefield;
+    public ArrayList kiMove(int matrixsize, GameField incomingGameField){
+        this.gamefield = incomingGameField;
         ArrayList<ArrayList> randomlist = new ArrayList<>();
         ArrayList<Integer> coordinates = new ArrayList<>();
         Random randomChooser = new Random();
-        int place = 0;
+    
         int listSize=0;
         int randomnumber=0;
         // Spielfeld absuchen nach noch nicht gezeichneten Linien. Falls sie nicht gezeichnet sind
@@ -35,34 +35,37 @@ public class RandomKI {
             
             if(row %2==0){
                 
-                for(int column1=1; column1<matrixsize-1;column1 = column1 + 2 ){
+                for(int column1 = 1; column1 < matrixsize-1;column1 = column1 + 2 ){
                     
-                    if(checkLine(row,column1)){
-                      randomlist.add(place, saveCoordinate(row,column1));
-                      place++;
+                    if(!checkLine(row,column1)){
+                      randomlist.add(saveCoordinate(row,column1));
                       
-                    }else{
+                    }
+                }
+                      
+            }else{
                         
-                    for(int column2 =0 ;column2 < matrixsize ; column2 = column2 + 2){
+                for(int column2 = 0 ;column2 < matrixsize ; column2 = column2 + 2){
                         
-                        if(checkLine(row,column2)){
-                        randomlist.add(place,saveCoordinate(row,column2));
-                        place++;
-                        }
+                    if(!checkLine(row,column2)){
+                        randomlist.add(saveCoordinate(row,column2));
+                        
                     }
                 }
             }
+                        
         }
-     }
         // Eine noch nicht gezeichnete Linie zufällig wählen;
         listSize = randomlist.size();
-        randomnumber = (int)(randomChooser.nextInt(listSize-1));
+        System.out.println("Listenlänge "+listSize);
+        randomnumber = (randomChooser.nextInt(listSize));
         coordinates = randomlist.get(randomnumber);
         int returnRow=coordinates.get(0);
         int returnColumn=coordinates.get(1);
         //Controller.move(returnRow,returnColumn,this);
-        System.out.println("Zeile "+ returnRow +" Spalte "+returnColumn);
+        return coordinates;//Nur zum Testen, sobald Controller läuft entfernen + Methode auf void setzen
     }
+        
  
     private boolean checkLine(int row, int column){
         return gamefield.isLineDrawed(row, column);
@@ -76,5 +79,5 @@ public class RandomKI {
     }   
        
     }
-}
+
 
