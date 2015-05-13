@@ -20,7 +20,12 @@ public class RandomKI {
         public RandomKI(GameField gamefield){
          this.gamefield = gamefield;   
         }
-        
+     /**
+      * Methode prüft, welche Linien gezeichnet werden können und wählt aus diesen zufällig eine aus.
+      * @param matrixsize Matrixgrösse des Spielfeldes
+      * @param incomingGameField Referenz auf das aktuelle Spielfeld
+      * 
+      */   
     public ArrayList kiMove(int matrixsize, GameField incomingGameField){
         this.gamefield = incomingGameField;
         ArrayList<ArrayList> randomlist = new ArrayList<>();
@@ -29,7 +34,7 @@ public class RandomKI {
     
         int listSize=0;
         int randomnumber=0;
-        // Spielfeld absuchen nach noch nicht gezeichneten Linien. Falls sie nicht gezeichnet sind
+        // Spielfeld absuchen nach noch nicht gezeichneten Linien. Falls sie nicht gezeichnet sind,
         // werden sie in der ArrayList randomList mit den Koordinaten abgespeichert.
         for(int row=0;row < matrixsize; row++){
             
@@ -66,11 +71,23 @@ public class RandomKI {
         return coordinates;//Nur zum Testen, sobald Controller läuft entfernen + Methode auf void setzen
     }
         
- 
+    /**
+     * Überprüft, ob die Linie schon gezeichnet wurde.
+     * @param row Index der Zeile der zu überprüfenden Linie
+     * @param column Index der Spalte der zu überprüfenden Linie
+     * @return true, falls die Linie schon gezeichnet wurde.
+     */
     private boolean checkLine(int row, int column){
         return gamefield.isLineDrawed(row, column);
         }
-    
+    /**
+     * Speichert die Koordinaten der noch nicht gezeichneten Linie in eine ArrayList
+     * mit dem Index 0=row und 1=column
+     * 
+     * @param row Index der Zeile
+     * @param column Index der Spalte
+     * @return ArrayList mit den Koordinaten Linie
+     */
     private ArrayList saveCoordinate(int row, int column){
        ArrayList<Integer> a = new ArrayList<>();
        a.add(row);
