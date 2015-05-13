@@ -27,6 +27,10 @@ public class Player
         this.reference=reference;
     }
     
+    public Player(){
+        
+    }
+    
     public String getName(){
         return name;
     }
