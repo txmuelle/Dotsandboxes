@@ -13,12 +13,14 @@ import javax.swing.*;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.IGameField;
 import ch.hslu.prg2.model.Player;
+import java.awt.event.MouseEvent;
+import javax.swing.event.MouseInputListener;
 
 /**
  *
  * @author Urs Müller
  */
-public class GUI extends JFrame {
+public class GUI extends JFrame implements MouseInputListener {
 
     private GameField gameField;
     private Player Player;
@@ -336,12 +338,68 @@ public class GUI extends JFrame {
     }
 
     private void register() {
+        
+            // listen to own mouse input
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 
     }
 
     public static void main(String[] Args) {
 
         GUI a = new GUI();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+            int nearx, neary;
+            // lookup line nearest to the mouse pointer
+		nearx = getNearestX(e.getX());
+                neary = getNearestY(e.getY());
+		// pass the event to state machine
+		//Controller.mousePressed(nearx, neary);
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        
+    }
+
+    private int getNearestX(int x) {
+        
+        return x;
+    }
+
+    private int getNearestY(int y) {
+        
+        return y;
+       
     }
 
 }
