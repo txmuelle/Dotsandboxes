@@ -21,6 +21,7 @@ public class GameField implements IGameField {
     private Lines[][] linematrix;
     private Boxes[][] boxmatrix;
     private int matrixSize;
+    private boolean gameOver;
 
     
     
@@ -30,6 +31,7 @@ public class GameField implements IGameField {
         boxmatrix = new Boxes [matrixSize][matrixSize];
         fillLineMatrix();
         fillBoxMatrix();
+        gameOver = false;
     }
     
     
@@ -169,6 +171,11 @@ public class GameField implements IGameField {
     public boolean isBoxFull(int row,int column){
         int counter = boxmatrix[row][column].getCounter();
         return (counter == 4);
+    }
+
+    @Override
+    public boolean isGameOver() {
+        return gameOver;
     }
     
     
