@@ -32,7 +32,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     JMenu menuFile = new JMenu("File");
     JMenu menuGame = new JMenu("online Game");
     JMenu menuHelp = new JMenu("Help");
-    JMenu miFileNew = new JMenu("New Game");
+    JMenuItem miFileNew = new JMenu("New Game");
     JMenuItem miFileNewEasy = new JMenuItem("Easy");
     JMenuItem miFileNewHard = new JMenuItem("Hard");
     JMenuItem miFileLoad = new JMenuItem("Load Game");
@@ -56,6 +56,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     //Playboard
     private int rows;
     private int cols;
+    private int size;
+    private int boxSize;
     private int dotSize;
 
     //Fonts
@@ -72,9 +74,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     final String ABOUTTEXT = "Dots and Boxes is a Java program written by "
             + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli Adrian\r\n"
             + "\r\n"
-            + "This was a project in PRG2 \r\n"
-            + "Hochschule Luzern \r\n"
-            + "FS15\r\n"
+            + "This was a project in PRG2 Hochschule Luzern FS15\r\n"
             + "\r\n";
     private Controller controller;
 
@@ -91,8 +91,6 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         //intial Frame
         super("Dots and Boxes");
 
-        // closing the main window should dispose of it, allowing VM to exit
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         this.gameField = gameField;
         this.controller = controller;
@@ -108,7 +106,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         register();
 
         //Sichtbar machen
-        //pack();
+
         setVisible(true);
     }
 
@@ -116,12 +114,12 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         //intial Frame
         super("Dots and Boxes");
 
-        // closing the main window should dispose of it, allowing VM to exit
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         //playboard  und Frame zeichnen
-        this.rows = 6;
-        this.cols = 6;
+        this.size = 6;
+        this.rows = size;
+        this.cols = size;
+        boxSize = 550/cols;
         paintPlayBoard();
 
         //MenuBar
@@ -189,74 +187,74 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                //Draw Senkrechte Striche
-                for (int y = cols - 1; y > 0; y--) {
-                    for (int x = 0; x < rows; x++) {
-
+                
+                for (int y = 0; y <= rows+1; y++) {
+                    for (int x = 0; x <= cols+1; x++) {
+                        
+                        
+                        //Draw Senkrechte Striche
+                        if((x <cols+1) && y<rows  ){
                         //Striche mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         g.setColor(Color.LIGHT_GRAY);
 
-                        g.fillRect(((int) x * 100) + 13, ((int) (y * -100) + 500) + 35, 5, 70);
-                    }
-                }
-                //Draw Waagrechte Striche 
-                for (int y = cols; y >= 0; y--) {
-                    for (int x = 0; x < rows - 1; x++) {
-
+                        g.fillRect(((int) x * boxSize) + 13*boxSize/100, ((int) (y * boxSize)) + 35*boxSize/100, 5*boxSize/100, 70*boxSize/100);
+                        }
+                        
+                        //Draw Waagrechte Striche
+                        if( (y <rows+1)&& x<cols ){                        
                         //Striche mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
+                        
                         g.setColor(Color.LIGHT_GRAY);
 
-                        g.fillRect(((int) x * 100) + 33, ((int) (y * -100) + 500) + 18, 70, 5);
+                        g.fillRect(((int) x * boxSize) + 33*boxSize/100, ((int) (y * boxSize) ) + 18*boxSize/100, 70*boxSize/100, 5*boxSize/100);}
                     }
                 }
+                 
+
 
                 //Draw Boxes
-                g.setColor(this.dotColor);
                 //Die Boxen zeichen und jenach Spielverlauf einfärben X O
-                for (int y = cols - 1; y > 0; y--) {
-                    for (int x = 0; x < rows - 1; x++) {
+                for (int y = 0; y < rows; y++) {
+                    for (int x = 0; x <cols ; x++) {
 
-                        boolean redplayer = false;
+                        boolean redplayer = true;
                         //Kreise mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         if (redplayer) {
                             g.setColor(Color.red);
 
-                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 0, 360);
                             g.setColor(getBackground());
-                            g.fillArc(((int) x * 100) + 35, ((int) (y * -100) + 500) + 35, 60, 60, 0, 360);
-                        } else {
+                            g.fillArc(((int) x * boxSize) + 30*boxSize/100+ 5*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100+5*boxSize/100, 60*boxSize/100, 60*boxSize/100, 0, 360);
+                        } else  {
 
                             g.setColor(Color.blue);
 
-                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 0, 360);
                             g.setColor(getBackground());
                             // east
-                            g.fillArc(((int) x * 100) + 30 + 6, ((int) (y * -100) + 500) + 30, 70, 70, -45, 90);
+                            g.fillArc(((int) x * boxSize) + 36*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, -45, 90);
                             // west
-                            g.fillArc(((int) x * 100) + 30 - 6, ((int) (y * -100) + 500) + 30, 70, 70, 135, 90);
+                            g.fillArc(((int) x * boxSize) + 24*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 135, 90);
                             // north
-                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30 - 6, 70, 70, 45, 90);
+                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100-6*boxSize/100, 70*boxSize/100, 70*boxSize/100, 45, 90);
                             // south
-                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30 + 6, 70, 70, -135, 90);
+                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100+6*boxSize/100, 70*boxSize/100, 70*boxSize/100, -135, 90);
                         }
                     }
                 }
 
                 // DRAW DOTS
                 g.setColor(this.dotColor);
-                // half the dot size
-                //Die Kreise zeichen und jenach Spielverlauf einfärben
-                for (int y = cols; y >= 0; y--) {
-                    for (int x = 0; x < rows; x++) {
-
+                for (int y = 0; y < rows+1; y++) {
+                    for (int x = 0; x < cols+1; x++) {
+                        
                         //Kreise mit der richtigen Farbe füllen
-                        //Player player = GameField.getGridPosition(x, y);
                         g.setColor(Color.black);
 
-                        g.fillArc(((int) x * 100) + 10, ((int) (y * -100) + 500) + 15, 10, 10, 0, 360);
+                        g.fillArc(((int) x * boxSize) + (10*boxSize/100), ((int) (y * boxSize) ) + 15*boxSize/100, 10*boxSize/100, 10*boxSize/100, 0, 360);
                     }
                 }
 
@@ -323,6 +321,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     private void setMenuBar() {
 
+        //File Menu
         this.menuFile.add(miFileNew);
         miFileNew.addActionListener(this);
         this.menuFile.add(miFileLoad);
@@ -332,15 +331,15 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         this.menuFile.addSeparator();
         this.menuFile.add(miFileExit);
         miFileExit.addActionListener(this);
-        
         this.menuBar.add(menuFile);
-
+        
+        //Onlinegame Menu
         this.menuGame.add(miGameHost);
         this.menuGame.add(miGameJoin);
         this.menuGame.add(miUDPGameHost);
         this.menuGame.add(miUDPGameSearch);
         this.menuBar.add(menuGame);
-
+        //Help Menu
         this.menuHelp.add(miHelpAbout);
         miHelpAbout.addActionListener(this);
         this.menuHelp.add(miHelpRules);
