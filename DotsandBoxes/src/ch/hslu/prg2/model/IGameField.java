@@ -25,5 +25,7 @@ public interface IGameField {
     
     public boolean isBoxFull(int row,int column);
     
+    public boolean isGameOver();
+    
     
 }

@@ -13,12 +13,16 @@ import javax.swing.*;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.IGameField;
 import ch.hslu.prg2.model.Player;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import javax.swing.event.MouseInputListener;
 
 /**
  *
  * @author Urs Müller
  */
-public class GUI extends JFrame {
+public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     private GameField gameField;
     private Player Player;
@@ -185,12 +189,11 @@ public class GUI extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                 
                 //Draw Senkrechte Striche
                 for (int y = cols - 1; y > 0; y--) {
                     for (int x = 0; x < rows; x++) {
 
-                        //Kreise mit der richtigen Farbe füllen
+                        //Striche mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         g.setColor(Color.LIGHT_GRAY);
 
@@ -201,7 +204,7 @@ public class GUI extends JFrame {
                 for (int y = cols; y >= 0; y--) {
                     for (int x = 0; x < rows - 1; x++) {
 
-                        //Kreise mit der richtigen Farbe füllen
+                        //Striche mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         g.setColor(Color.LIGHT_GRAY);
 
@@ -214,7 +217,7 @@ public class GUI extends JFrame {
                 //Die Boxen zeichen und jenach Spielverlauf einfärben X O
                 for (int y = cols - 1; y > 0; y--) {
                     for (int x = 0; x < rows - 1; x++) {
-                        
+
                         boolean redplayer = false;
                         //Kreise mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
@@ -224,21 +227,27 @@ public class GUI extends JFrame {
                             g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
                             g.setColor(getBackground());
                             g.fillArc(((int) x * 100) + 35, ((int) (y * -100) + 500) + 35, 60, 60, 0, 360);
-                        }
-                        else{
-                        
-                            g.setColor(Color.red);
+                        } else {
+
+                            g.setColor(Color.blue);
 
                             g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30, 70, 70, 0, 360);
                             g.setColor(getBackground());
-                            g.fillArc(((int) x * 100) + 35, ((int) (y * -100) + 500) + 35, 60, 60, 0, 360);
+                            // east
+                            g.fillArc(((int) x * 100) + 30 + 6, ((int) (y * -100) + 500) + 30, 70, 70, -45, 90);
+                            // west
+                            g.fillArc(((int) x * 100) + 30 - 6, ((int) (y * -100) + 500) + 30, 70, 70, 135, 90);
+                            // north
+                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30 - 6, 70, 70, 45, 90);
+                            // south
+                            g.fillArc(((int) x * 100) + 30, ((int) (y * -100) + 500) + 30 + 6, 70, 70, -135, 90);
                         }
                     }
                 }
 
                 // DRAW DOTS
                 g.setColor(this.dotColor);
-		// half the dot size
+                // half the dot size
                 //Die Kreise zeichen und jenach Spielverlauf einfärben
                 for (int y = cols; y >= 0; y--) {
                     for (int x = 0; x < rows; x++) {
@@ -315,12 +324,15 @@ public class GUI extends JFrame {
     private void setMenuBar() {
 
         this.menuFile.add(miFileNew);
-        this.miFileNew.add(miFileNewEasy);
-        this.miFileNew.add(miFileNewHard);
+        miFileNew.addActionListener(this);
         this.menuFile.add(miFileLoad);
+        miFileLoad.addActionListener(this);
         this.menuFile.add(miFileSave);
+        miFileSave.addActionListener(this);
         this.menuFile.addSeparator();
         this.menuFile.add(miFileExit);
+        miFileExit.addActionListener(this);
+        
         this.menuBar.add(menuFile);
 
         this.menuGame.add(miGameHost);
@@ -330,6 +342,9 @@ public class GUI extends JFrame {
         this.menuBar.add(menuGame);
 
         this.menuHelp.add(miHelpAbout);
+        miHelpAbout.addActionListener(this);
+        this.menuHelp.add(miHelpRules);
+        miHelpRules.addActionListener(this);
         this.menuBar.add(menuHelp);
 
         setJMenuBar(menuBar);
@@ -337,11 +352,98 @@ public class GUI extends JFrame {
 
     private void register() {
 
+        // listen to own mouse input
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+
     }
 
     public static void main(String[] Args) {
 
         GUI a = new GUI();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int nearx, neary;
+        // lookup line nearest to the mouse pointer
+        nearx = getNearestX(e.getX());
+        neary = getNearestY(e.getY());
+        // pass the event to state machine
+        //Controller.mousePressed(nearx, neary);
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    private int getNearestX(int x) {
+
+        return x;
+    }
+
+    private int getNearestY(int y) {
+
+        return y;
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        // New Game menu item was selected
+		if (e.getActionCommand().equals("New Game")) {
+			// show modal new game dialog box
+			//newGameDialog.showDialog();
+		}
+
+		// How to Play menu item was selected
+		else if (e.getActionCommand().equals("Rules")) {
+			// show the instructional modal dialog box
+			JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT, "How To Play",
+					JOptionPane.PLAIN_MESSAGE);
+		}
+
+		// About menu item was selected
+		else if (e.getActionCommand().equals("About")) {
+			// show the modal about box
+			JOptionPane.showMessageDialog(this, ABOUTTEXT,
+					"About Dots and Boxes", JOptionPane.PLAIN_MESSAGE);
+		}
+
+		// Exit menu item was selected
+		else if (e.getActionCommand().equals("Exit")) {
+			// dispose of the main window. Java VM will exit if there are no
+			// other threads or windows.
+			this.dispose();
+		}
     }
 
 }

@@ -6,6 +6,7 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
+import java.util.Scanner;
 
 
 /**
@@ -20,6 +21,7 @@ public class GameField implements IGameField {
     private Lines[][] linematrix;
     private Boxes[][] boxmatrix;
     private int matrixSize;
+    private boolean gameOver;
 
     
     
@@ -29,6 +31,7 @@ public class GameField implements IGameField {
         boxmatrix = new Boxes [matrixSize][matrixSize];
         fillLineMatrix();
         fillBoxMatrix();
+        gameOver = false;
     }
     
     
@@ -45,7 +48,7 @@ public class GameField implements IGameField {
                 else{
                     int columns = 0;
                     while(columns < matrixSize){
-                        linematrix[rows][columns] = new Lines (rows, columns);
+                        linematrix[rows][columns] = new Lines(rows, columns);
                         columns += 2;
                     }
                     
@@ -72,10 +75,15 @@ public class GameField implements IGameField {
      */
     @Override
     public void setLine(int row, int column, Player p){
+        try{
         linematrix[row][column].setOwner(p);
-        
-        //Setzen des Counters ,der von der Linie abhänigigen Boxen. 
-        if(row %2 == 0){//  Überprüfung, ob eine horizontale Linie ist.
+        }
+        catch(NullPointerException e){
+            System.out.println("Keine Line bei: " + row +" "+ column+ " möglich.");
+        }
+        //Setzen des Counters ,der von der Linie abhänigigen Boxen.
+        //  Überprüfung, ob eine horizontale Linie ist.
+        if(row % 2 == 0){
             checkBoxes(row-1,column,p);
             checkBoxes(row+1,column,p);   
         }else{
@@ -118,6 +126,14 @@ public class GameField implements IGameField {
         return matrixSize;
     }
     
+    public Lines[][] getLineMatrix(){
+        return linematrix;
+    }
+    
+    public Boxes[][] getBoxMatrix(){
+        return boxmatrix;
+    }
+    
     @Override
     public boolean isLineDrawed(int row, int column){
         return !linematrix[row][column].isEmpty();
@@ -156,23 +172,24 @@ public class GameField implements IGameField {
         int counter = boxmatrix[row][column].getCounter();
         return (counter == 4);
     }
-    
-//    public static void main(String [] args){
-//        GameField g = new GameField(2);
-//        Player p = new Player("Lucius", Color.BLACK);
-//        g.linematrix[3][0].setOwner(p);
-//        System.out.println(g.isLineDrawed(3, 0));
-//        g.setLine(0, 1, p);
-//        g.setLine(1, 2, p);
-//        Boxes b1= g.boxmatrix[1][1];
-//        Boxes b2= g.boxmatrix[1][3];
-//        System.out.println(b1.getCounter());
-//        g.setLine(2,1, p);
-//        g.setLine(1,0, p);
-//        System.out.println(b1.getCounter());
-//        System.out.println(b2.getCounter());
-//        System.out.println(b1.getOwner());
-//    }
 
+    @Override
+    public boolean isGameOver() {
+        return gameOver;
+    }
+    
+    
+    /**
+     * 
+     * MAIN Methode fürs Testen:-)
    
+    public static void main(String [] args){
+        GameField g = new GameField(100);
+        Player p = new Player("Luci",Color.BLACK,null);
+        PrintOut print = new PrintOut(g.matrixSize,g.boxmatrix,g.linematrix);
+        print.PrintMatrix();
+    }
+    * 
+    */
+        
 }
