@@ -26,7 +26,8 @@ public class RandomKI {
       * @param incomingGameField Referenz auf das aktuelle Spielfeld
       * 
       */   
-    public ArrayList kiMove(int matrixsize, GameField incomingGameField){
+    public ArrayList kiMove(GameField incomingGameField){
+        int matrixsize = incomingGameField.getMatrixSize();
         this.gamefield = incomingGameField;
         ArrayList<ArrayList> randomlist = new ArrayList<>();
         ArrayList<Integer> coordinates = new ArrayList<>();
