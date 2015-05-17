@@ -7,7 +7,7 @@ package ch.hslu.prg2.controlling;
 
 /**
  *
- * @author Patrick
+ * @author Patrick Rossacher
  */
 public class GameVariant {
     private int gameModi;

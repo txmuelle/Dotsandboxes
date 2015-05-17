@@ -18,13 +18,14 @@ public class Player
     private String name;
     private Color color;
     private int score = 0;
-    private boolean IsActive = false;
+    private boolean isActive = false;
     private Object reference;
     
-    public Player(String name, Color color, Object reference){
+    public Player(String name, Color color, Object reference, boolean isActive){
         this.name = name;
         this.color = color;
-        this.reference=reference;
+        this.reference = reference;
+        this.isActive = isActive;
     }
     
     public Player(){
@@ -44,7 +45,7 @@ public class Player
     }
     
     public boolean getIsActive() {
-        return IsActive;
+        return isActive;
     }
    
     public Object getReference(){
@@ -63,8 +64,8 @@ public class Player
         this.score = score;
     }
 
-    public void setIsActive(boolean IsActive) {
-        this.IsActive = IsActive;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
     
     

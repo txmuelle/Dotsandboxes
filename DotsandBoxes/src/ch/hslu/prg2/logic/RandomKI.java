@@ -26,7 +26,8 @@ public class RandomKI {
       * @param incomingGameField Referenz auf das aktuelle Spielfeld
       * 
       */   
-    public ArrayList kiMove(int matrixsize, GameField incomingGameField){
+    public ArrayList kiMove(GameField incomingGameField){
+        int matrixsize = incomingGameField.getMatrixSize();
         this.gamefield = incomingGameField;
         ArrayList<ArrayList> randomlist = new ArrayList<>();
         ArrayList<Integer> coordinates = new ArrayList<>();
@@ -62,11 +63,12 @@ public class RandomKI {
         }
         // Eine noch nicht gezeichnete Linie zufällig wählen;
         listSize = randomlist.size();
-        System.out.println("Listenlänge "+listSize);
+        System.out.println("Listenlänge: "+listSize);
         randomnumber = (randomChooser.nextInt(listSize));
         coordinates = randomlist.get(randomnumber);
         int returnRow=coordinates.get(0);
         int returnColumn=coordinates.get(1);
+        System.out.println("row: " + returnRow + " colmn: " + returnColumn);
         //Controller.move(returnRow,returnColumn,this);
         return coordinates;//Nur zum Testen, sobald Controller läuft entfernen + Methode auf void setzen
     }

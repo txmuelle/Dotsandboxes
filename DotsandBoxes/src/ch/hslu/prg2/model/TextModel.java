@@ -21,7 +21,7 @@ public class TextModel {
     
     public void startText(){
     GameField g = new GameField(4);
-    Player p = new Player("P1",Color.BLACK,null);
+    Player p = new Player("P1",Color.BLACK,null,true);
     PrintOut print = new PrintOut(g.getMatrixSize(),g.getBoxMatrix(),g.getLineMatrix());
     Scanner scan = new Scanner(System.in);
     while(!print.isMatrixFull()){
