@@ -53,12 +53,16 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private JPanel placeholder3 = new JPanel(new GridLayout(1, 7));
     private JPanel playBoard;
 
+    //Frame
+    int xFramePos;
+    int yFramePos;
     //Playboard
     private int rows;
     private int cols;
     private int size;
     private int boxSize;
     private int dotSize;
+    private int [][] lines;
 
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
@@ -116,7 +120,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
 
         //playboard  und Frame zeichnen
-        this.size = 6;
+        this.size = 5;
         this.rows = size;
         this.cols = size;
         boxSize = 550/cols;
@@ -197,7 +201,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                         //Striche mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         g.setColor(Color.LIGHT_GRAY);
-
+                        
                         g.fillRect(((int) x * boxSize) + 13*boxSize/100, ((int) (y * boxSize)) + 35*boxSize/100, 5*boxSize/100, 70*boxSize/100);
                         }
                         
@@ -286,9 +290,11 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         //Frame Location
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (dim.width - super.getSize().width) / 2;
-        int y = (dim.height - super.getSize().height) / 2;
-        super.setLocation(x, y);
+        
+        xFramePos = (dim.width - super.getSize().width) / 2;
+        
+        yFramePos = (dim.height - super.getSize().height) / 2;
+        super.setLocation(xFramePos, yFramePos);
 
         //set Icon 
         ImageIcon logoIcon = new ImageIcon("images\\logo.png");
@@ -366,8 +372,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     public void mouseClicked(MouseEvent e) {
         int nearx, neary;
         // lookup line nearest to the mouse pointer
-        nearx = getNearestX(e.getX());
-        neary = getNearestY(e.getY());
+        getNearest(e.getX(), e.getY());
         // pass the event to state machine
         //Controller.mousePressed(nearx, neary);
 
@@ -375,12 +380,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+       // lookup line nearest to the mouse pointer
+    
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+    
     }
 
     @Override
@@ -403,9 +409,48 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     }
 
-    private int getNearestX(int x) {
+    private void getNearest(int x, int y) {
+        
+        // find the mouse position relative to the field origin
+		x -= xFramePos - 17;
+		y -= xFramePos - 66;
+		// mouse is over the box at this row and column
+		int col = x / boxSize;
+		int row = y / boxSize;
 
-        return x;
+		// clamp point into field
+		if (col < 0) col = 0;
+		if (col >= this.cols) col = this.cols - 1;
+		if (row < 0) row = 0;
+		if (row >= this.rows) row = this.rows - 1;
+                
+		// the nearest box
+		//Box nearestBox = this.box[col][row];
+
+		// find mouse position relative to the box's origin
+		x -= boxSize * col;
+		y -= boxSize * row;   
+                
+                // Box finden
+                if( col == 0) col = 1;
+                else{col+=col+1;}
+                if( row == 0) row = 1;
+                else{row+=row+1;}
+                
+                //Linie finden
+                int lineCol=0;
+                int lineRow=0;
+                if (x < boxSize/8) lineCol= col-1;
+                else if (x > 7*boxSize/8) lineCol= col+1;
+                else lineCol = col;
+                if (y < boxSize/8) lineRow = row-1;
+                else if (y > 7*boxSize/8) lineRow = row+1;
+                else lineRow = row;
+                // Infos an Gamemanager weitergeben
+                
+
+        System.out.println("x: "+x + "  y: "+y + " col: " +col+"  row: "+row + "  line; " + lineCol + " x  "+lineRow+" y");
+        
     }
 
     private int getNearestY(int y) {
