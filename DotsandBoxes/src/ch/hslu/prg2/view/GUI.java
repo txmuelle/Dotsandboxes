@@ -26,7 +26,7 @@ import javax.swing.event.MouseInputListener;
 public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     private GameField gameField;
-    private Player player1, plyer2;
+    private Player player1, player2;
 
     //Layout MenuBar
     JMenuBar menuBar = new JMenuBar();
@@ -101,7 +101,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         this.gameField = gameField;
         this.controller = controller;
         this.player1 = player1;
-        this.plyer2 = player2;
+        this.player2 = player2;
         this.size = (gameField.getMatrixSize() - 1) / 2;
         this.rows = size;
         this.cols = size;
@@ -266,10 +266,10 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                          Color col = gameField.getBoxColor(yrow, xcol);
                          g.setColor(col);
                          Player owner = gameField.getBoxOwner(yrow, xcol);
-                         Player pl1 = controller.getPayer1();
+                         //Player pl1 = controller.getPayer1();
                          
                          
-                        if (pl1 == owner) {
+                        if (player1 == owner) {
                             
 
                             
@@ -308,6 +308,27 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
                         g.fillArc(((int) x * boxSize) + (10 * boxSize / 100), ((int) (y * boxSize)) + 15 * boxSize / 100, 10 * boxSize / 100, 10 * boxSize / 100, 0, 360);
                     }
+                }
+                
+                                //bei Spielende das "Game over" - Fenster zeichnen
+                if(controller.isGameOver()){
+                    g.setColor(Color.black);
+                    g.drawRoundRect(49, 149, 602, 202, 8, 8);
+                    g.setColor(new Color(181, 181, 181, 200));
+                    g.fillRoundRect(50, 150, 600, 200, 8, 8);
+                    Font f = new Font(Font.SANS_SERIF, 1, 100);
+                    g.setFont(f);
+                    g.setColor(Color.red);
+                    g.drawString("Game Over", 60, 250);
+                    Font info = new Font(Font.DIALOG, 1, 40);
+                    g.setFont(info);
+                    g.setColor(Color.black);
+                    String WinnerName = "A";
+                         //col player1.getScore()
+                    g.drawString("  Winner is: "+WinnerName, 60, 300);
+
+                    placeholder1.repaint();
+                    placeholder2.repaint();
                 }
 
             }
@@ -544,7 +565,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             return -1;
         } // Infos an Gamemanager weitergeben
         else {
-            System.out.println("line; " + lineRow + " y" + lineCol + " x  ");
+            System.out.println("line: " + lineRow + "y  " + lineCol + "x");
             this.controller.move(lineRow, lineCol, this);
             return 1;
         }
