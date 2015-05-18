@@ -60,7 +60,7 @@ public class Controller {
                 } else{}
                 
             } else {}
-            gui.update();
+            this.gui.update();
             nextMove();
         } else {}
     }
@@ -144,8 +144,8 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
-        GUI gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
-        gui.update();
+        gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
+        this.gui.update();
         nextMove();
 
     }
