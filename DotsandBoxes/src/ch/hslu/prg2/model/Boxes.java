@@ -67,5 +67,13 @@ public class Boxes {
         this.column = column;
     }
     
-    
+    @Override
+    public String toString(){
+     try{
+        return (getRow() + " " + getColumn() + " " + getOwner().getName() + " ");
+        }
+        catch(NullPointerException ne){
+        return null; 
+        }
+    }
 }

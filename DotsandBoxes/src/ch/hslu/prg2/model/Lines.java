@@ -61,4 +61,14 @@ public class Lines {
         return owner == null;
     }
     
+    @Override
+    public String toString(){
+        try{
+        return (getRow() + " " + getColumn() + " " + getOwner().getName() + " ");
+        }
+        catch(NullPointerException ne){
+        return null; 
+        }
+    }
+    
 }
