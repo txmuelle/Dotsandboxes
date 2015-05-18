@@ -9,6 +9,7 @@ package ch.hslu.prg2.controlling;
 import ch.hslu.prg2.logic.RandomKI;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.Player;
+import ch.hslu.prg2.model.PrintOut;
 import ch.hslu.prg2.view.GUI;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Controller {
 
     public Controller() {
         //GUI gui = new GUI(gameField, this, player1, player2, gameVariant);
-        startGame(0, 2, "Dumm", "Dümmer");
+        startGame(0, 2, "A", "B");
     }
 
     public boolean move(int row, int colum, Object reference) {
@@ -81,6 +82,8 @@ public class Controller {
             System.out.println("Game Over!\nPlayer1 = " + player1.getScore() + "\nPlayer2 = " + player2.getScore());
             player1.setIsActive(false);
             player2.setIsActive(false);
+            PrintOut print = new PrintOut(gameField.getMatrixSize(), gameField.getBoxMatrix(), gameField.getLineMatrix());
+            print.printMatrix();
         }
     }
 
