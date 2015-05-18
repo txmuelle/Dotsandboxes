@@ -152,6 +152,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     public void update() {
 
         this.playBoard.repaint();
+        this.placeholder1.repaint();
+        this.placeholder2.repaint();
 
     }
 
@@ -189,7 +191,24 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 g.drawString("Red Player", 20, 30);
                 ImageIcon playerIcon1 = new ImageIcon("images\\player_red.png");
                 Image icon1 = playerIcon1.getImage();
-                g.drawImage(icon1, 10, 50, rootPane);
+                g.drawImage(icon1, 10, 60, rootPane);
+                g.drawString(player1.getName(), 20, 50);
+                g.drawString("Score: " + player1.getScore(), 20, 220);
+                if(controller.isGameOver()){
+                    if(player1.getScore() > player2.getScore()){
+                        g.setColor(Color.red);
+                        g.drawString("Winner!", 20, 200);
+                    }
+                }
+                else
+                {
+                    
+                    if(player1.getIsActive())
+                    {
+                        g.setColor(Color.red);
+                        g.drawString("Is on turn", 20, 200);
+                    }
+                }
 
             }
         };
@@ -317,13 +336,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                     Font info = new Font(Font.DIALOG, 1, 40);
                     g.setFont(info);
                     g.setColor(Color.black);
-                    /*                    String WinnerName= " ";
+                    String WinnerName= " ";
                     if (player1.getScore() > player2.getScore()) {
                     WinnerName = player1.getName();
                     } else {
                     WinnerName = player2.getName();
                     }
-                    g.drawString("  Winner is: " + WinnerName, 60, 300);*/
+                    g.drawString("  Winner is: " + WinnerName, 60, 300);
                     placeholder1.repaint();
                     placeholder2.repaint();
                 }
@@ -345,8 +364,23 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 playerIcon2 = new ImageIcon("images\\player_blue.png");
 
                 Image icon1 = playerIcon2.getImage();
-                g.drawImage(icon1, 10, 50, rootPane);
-
+                g.drawImage(icon1, 10, 60, rootPane);
+                g.drawString(player2.getName(), 20, 50);
+                g.drawString("Score: " + player2.getScore(), 20, 220);
+                if(controller.isGameOver()){
+                    if(player1.getScore() < player2.getScore()){
+                        g.setColor(Color.red);
+                        g.drawString("Winner!", 20, 200);
+                    }
+                }
+                else
+                {
+                    if(player2.getIsActive())
+                    {
+                        g.setColor(Color.red);
+                        g.drawString("Is on turn", 20, 200);
+                    }
+                }
             }
         };
 

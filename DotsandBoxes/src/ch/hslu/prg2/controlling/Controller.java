@@ -29,7 +29,7 @@ public class Controller {
 
     public Controller() {
 
-        startGame(2, 3, "A", "B");
+        startGame(2, 3, "Alois", "Compi");
     }
 
     /**
