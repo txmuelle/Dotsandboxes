@@ -78,8 +78,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     // about box text
     final String ABOUTTEXT = "Dots and Boxes is a Java program written by "
-            + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli 
-Adrian\r\n"
+            + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli Adrian\r\n"
             + "\r\n"
             + "This was a project in PRG2 Hochschule Luzern FS15\r\n"
             + "\r\n";
