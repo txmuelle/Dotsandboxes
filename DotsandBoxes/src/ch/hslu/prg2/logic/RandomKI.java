@@ -26,10 +26,10 @@ public class RandomKI {
       * @param incomingGameField Referenz auf das aktuelle Spielfeld
       * 
       */   
-    public ArrayList kiMove(GameField incomingGameField){
+    public ArrayList<Integer> kiMove(GameField incomingGameField){
         int matrixsize = incomingGameField.getMatrixSize();
         this.gamefield = incomingGameField;
-        ArrayList<ArrayList> randomlist = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> randomlist = new ArrayList<>();
         ArrayList<Integer> coordinates = new ArrayList<>();
         Random randomChooser = new Random();
     
@@ -90,7 +90,7 @@ public class RandomKI {
      * @param column Index der Spalte
      * @return ArrayList mit den Koordinaten Linie
      */
-    private ArrayList saveCoordinate(int row, int column){
+    private ArrayList<Integer> saveCoordinate(int row, int column){
        ArrayList<Integer> a = new ArrayList<>();
        a.add(row);
        a.add(column);

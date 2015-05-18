@@ -13,6 +13,7 @@ import ch.hslu.prg2.model.PrintOut;
 import ch.hslu.prg2.view.GUI;
 import java.awt.Color;
 import java.util.ArrayList;
+//import java.lang.Math.*;
 //test
 
 /**
@@ -29,10 +30,10 @@ public class Controller {
 
     public Controller() {
         //GUI gui = new GUI(gameField, this, player1, player2, gameVariant);
-        startGame(0, 2, "A", "B");
+        startGame(0, 10, "A", "B");
     }
 
-    public boolean move(int row, int colum, Object reference) {
+    public void move(int row, int colum, Object reference) {
         if (!gameField.isLineDrawed(row, colum)) {
             if (player1.getReference() == reference && player1.getIsActive()) {
                 gameField.setLine(row, colum, player1);
@@ -42,15 +43,10 @@ public class Controller {
                 gameField.setLine(row, colum, player2);
                 player2.setIsActive(false);
                 player1.setIsActive(true);
-            } else {
-                return false;
-            }
+            } else {}
 //            gui.update();
             nextMove();
-            return true;
-        } else {
-            return false;
-        }
+        } else {}
     }
 
     /**
@@ -59,7 +55,7 @@ public class Controller {
      * aus: Gui -> keine Aktion (Methode Beenden und auf nächste Eingabe warten)
      *      KI  -> Die KI führt einen Zug aus Es wird ausserdem überprüft ob die
      * maximale Punktzahl erreicht wurde.
-     */
+     *///(gameField.getMatrixSize() - 1) / 2)
     private void nextMove() {
         Object activePlayer = null;
         if (player1.getIsActive()) {
@@ -67,8 +63,7 @@ public class Controller {
         } else if (player2.getIsActive()) {
             activePlayer = player2.getReference();
         }
-        if (player1.getScore() + player2.getScore() <= (gameField.getMatrixSize() - 1) / 2) {
-
+        if (player1.getScore() + player2.getScore() < Math.pow((gameField.getMatrixSize() - 1) / 2,2)) {
             if (activePlayer == gui) {
 
             } else if (activePlayer.equals(randomKi)) {

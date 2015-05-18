@@ -36,7 +36,7 @@ public class TextModel {
             System.out.println("Ungültige Eingabe.");
         }
             
-        print.PrintMatrix();
+        print.printMatrix();
         
         }
     }
