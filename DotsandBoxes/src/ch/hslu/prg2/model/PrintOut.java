@@ -35,19 +35,19 @@ public class PrintOut {
         return full;
     }
     
-    public void PrintMatrix(){
+    public void printMatrix(){
         
         for(int row = 0; row < matrixSize; row++){
             for(int column = 0; column < matrixSize; column++){
                 try{
                    if((row % 2 == 0) && ((column % 2) != 0)){
-                        System.out.print("|" + row + column + this.linematrix[row][column].getOwner().getName() + "|" );
+                        System.out.print("|" + row + column + this.linematrix[row][column].getOwner().getName() + "|\t" );
                    }
                    else if(((row % 2) != 0) && ((column % 2) == 0)){
-                        System.out.print("|" + row + column + this.linematrix[row][column].getOwner().getName() + "|" );
+                        System.out.print("|" + row + column + this.linematrix[row][column].getOwner().getName() + "|\t" );
                         }
                    else{
-                        System.out.print("|" + row + column + this.boxmatrix[row][column].getOwner().getName() + "|" );
+                        System.out.print( "|"+ row + column + this.boxmatrix[row][column].getOwner().getName() + "|\t" );
                         this.boxcounter++;
                         }
                 }
@@ -59,10 +59,10 @@ public class PrintOut {
                    }
                    else{
                        if(row % 2 == 0){
-                      System.out.print("|   |");
+                      System.out.print("|\t|");
                        }
                        else{
-                      System.out.print("|     |"); 
+                      System.out.print("|\t|"); 
                        }
                    }   
                  }
