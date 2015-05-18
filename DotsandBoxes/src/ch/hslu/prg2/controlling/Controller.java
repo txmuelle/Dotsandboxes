@@ -86,7 +86,7 @@ public class Controller {
             activePlayer = player2.getReference();
         }
         if (player1.getScore() + player2.getScore() < Math.pow((gameField.getMatrixSize() - 1) / 2, 2)) {
-            if (activePlayer == gui) {
+            if (activePlayer.equals(gui)) {
 
             } else if (activePlayer.equals(randomKi)) {
                 ArrayList<Integer> coordinates = randomKi.kiMove(gameField);
@@ -125,7 +125,7 @@ public class Controller {
         gameVariant = new GameVariant(gameModi);
         randomKi = new RandomKI(gameField);
         GameOver = false;
-
+        gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
         switch (gameModi) {
             case 1:
                 this.player1 = new Player(player1, color1, randomKi, true);
@@ -147,7 +147,7 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
-        gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
+        
         this.gui.update();
         nextMove();
 
