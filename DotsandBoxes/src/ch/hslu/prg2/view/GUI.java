@@ -63,7 +63,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private int cols;
     private int size;
     private int boxSize;
-    private Color dotColor= Color.BLACK;
+    private Color dotColor = Color.BLACK;
     private int[][] lines;
 
     //Fonts
@@ -93,8 +93,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
      * @param player2
      * @param gameVar
      */
-    public GUI(GameField gameField, Controller controller, Player player1, Player 
-player2, GameVariant gameVar) {
+    public GUI(GameField gameField, Controller controller, Player player1, Player player2, GameVariant gameVar) {
         //intial Frame
         super("Dots and Boxes");
 
@@ -196,7 +195,6 @@ player2, GameVariant gameVar) {
         };
 
         this.playBoard = new JPanel() {
-            
 
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -211,17 +209,16 @@ player2, GameVariant gameVar) {
                             int xcol;
                             int yrow;
                             //Linie finden
-                                yrow = 2 * y + 1;
-                                xcol = 2 * x;
+                            yrow = 2 * y + 1;
+                            xcol = 2 * x;
 
                             if ((xcol % 2 == 0) && !(yrow % 2 == 0)) {
-                                Color col = gameField.getLineColor(yrow, xcol);
-                                g.setColor(col);
+                                Color col2 = gameField.getLineColor(yrow, xcol);
+                                g.setColor(col2);
                             }
 
                             //g.setColor(Color.LIGHT_GRAY);
-                            g.fillRect(((int) x * boxSize) + 13 * boxSize / 100, 
-((int) (y * boxSize)) + 35 * boxSize / 100, 5 * boxSize / 100, 70 * boxSize / 100);
+                            g.fillRect(((int) x * boxSize) + 13 * boxSize / 100,((int) (y * boxSize)) + 35 * boxSize / 100, 5 * boxSize / 100, 70 * boxSize / 100);
                         }
 
                         //Draw Waagrechte Striche
@@ -233,19 +230,17 @@ player2, GameVariant gameVar) {
                             int yrow;
                             //Linie finden
 
-
-                                yrow = 2 * y;
-                                xcol = 2 * x + 1;
-                            
+                            yrow = 2 * y;
+                            xcol = 2 * x + 1;
 
                             if (!(xcol % 2 == 0) && (yrow % 2 == 0)) {
-                                Color col = gameField.getLineColor(yrow, xcol);
-                                g.setColor(col);
+                                Color col1 = gameField.getLineColor(yrow, xcol);
+                                g.setColor(col1);
                             }
                             //g.setColor(Color.LIGHT_GRAY);
 
-                            g.fillRect(((int) x * boxSize) + 33 * boxSize / 100, 
-((int) (y * boxSize)) + 18 * boxSize / 100, 70 * boxSize / 100, 5 * boxSize / 100);
+                            g.fillRect(((int) x * boxSize) + 33 * boxSize / 100,
+                                    ((int) (y * boxSize)) + 18 * boxSize / 100, 70 * boxSize / 100, 5 * boxSize / 100);
                         }
                     }
                 }
@@ -263,51 +258,45 @@ player2, GameVariant gameVar) {
                         //Linie finden
 
                         /*                        if (x == 0) {
-                        yrow = 2 * y + 1;
-                        xcol = x+x+1;
-                        } else {
-                        yrow = 2 * y + 1;
-                        xcol = 2 * x;
-                        }
+                         yrow = 2 * y + 1;
+                         xcol = x+x+1;
+                         } else {
+                         yrow = 2 * y + 1;
+                         xcol = 2 * x;
+                         }
                         
-                        if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
-                        Color col = gameField.getLineColor(yrow, xcol);
-                        g.setColor(col);
-                        }*/
+                         if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
+                         Color col = gameField.getLineColor(yrow, xcol);
+                         g.setColor(col);
+                         }*/
                         if (redplayer) {
                             g.setColor(Color.red);
 
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
                             g.setColor(getBackground());
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5 * 
-boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60 * 
-boxSize / 100, 60 * boxSize / 100, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5
+                                    * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60
+                                    * boxSize / 100, 60 * boxSize / 100, 0, 360);
                         } else {
 
                             g.setColor(Color.blue);
 
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
                             g.setColor(getBackground());
                             // east
-                            g.fillArc(((int) x * boxSize) + 36 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -45, 90);
+                            g.fillArc(((int) x * boxSize) + 36 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -45, 90);
                             // west
-                            g.fillArc(((int) x * boxSize) + 24 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 135, 90);
+                            g.fillArc(((int) x * boxSize) + 24 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 135, 90);
                             // north
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100 - 6 * boxSize / 100, 70 * boxSize / 100, 70 * 
-boxSize / 100, 45, 90);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 - 6 * boxSize / 100, 70 * boxSize / 100, 70
+                                    * boxSize / 100, 45, 90);
                             // south
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) 
-(y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70 * 
-boxSize / 100, -135, 90);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70
+                                    * boxSize / 100, -135, 90);
                         }
                     }
                 }
-                
+
                 // DRAW DOTS
                 g.setColor(dotColor);
                 for (int y = 0; y < rows + 1; y++) {
@@ -316,8 +305,7 @@ boxSize / 100, -135, 90);
                         //Kreise mit der richtigen Farbe füllen
                         g.setColor(dotColor);
 
-                        g.fillArc(((int) x * boxSize) + (10 * boxSize / 100), ((int) 
-(y * boxSize)) + 15 * boxSize / 100, 10 * boxSize / 100, 10 * boxSize / 100, 0, 360);
+                        g.fillArc(((int) x * boxSize) + (10 * boxSize / 100), ((int) (y * boxSize)) + 15 * boxSize / 100, 10 * boxSize / 100, 10 * boxSize / 100, 0, 360);
                     }
                 }
 
@@ -365,8 +353,7 @@ boxSize / 100, -135, 90);
 
         //Display 1 (Panel aussen)
         add(display1, BorderLayout.CENTER);
-        this.display1.setBorder(javax.swing.BorderFactory.createLineBorder(new 
-java.awt.Color(0, 0, 0)));
+        this.display1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         this.display1.add(placeholder1, BorderLayout.WEST);
         this.placeholder1.setPreferredSize(new Dimension(150, 500));
         this.display1.add(display2, BorderLayout.CENTER);
@@ -381,8 +368,7 @@ java.awt.Color(0, 0, 0)));
         //Play Board
         this.display2.add(playBoard, BorderLayout.CENTER);
         this.playBoard.setPreferredSize(new Dimension(600, 400));
-        this.playBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new 
-java.awt.Color(0, 0, 0)));
+        this.playBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
     }
 
@@ -585,11 +571,10 @@ java.awt.Color(0, 0, 0)));
         } // Exit menu item was selected
         else if (e.getActionCommand().equals("Exit")) {
             this.dispose();
-        }
-        else if (e.getActionCommand().equals("repaint")) {
-         this.dotColor = Color.ORANGE;
-         this.playBoard.repaint();
-         
+        } else if (e.getActionCommand().equals("repaint")) {
+            this.dotColor = Color.ORANGE;
+            this.playBoard.repaint();
+
         }
     }
 

@@ -43,6 +43,7 @@ public class Lines {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+        this.color = owner.getColor();
     }
 
     public void setColor(Color color) {
