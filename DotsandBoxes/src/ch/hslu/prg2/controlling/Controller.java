@@ -13,8 +13,6 @@ import ch.hslu.prg2.model.PrintOut;
 import ch.hslu.prg2.view.GUI;
 import java.awt.Color;
 import java.util.ArrayList;
-//import java.lang.Math.*;
-//test
 
 /**
  *
@@ -30,7 +28,7 @@ public class Controller {
 
     public Controller() {
         //GUI gui = new GUI(gameField, this, player1, player2, gameVariant);
-        startGame(0, 10, "A", "B");
+        startGame(0, 3, "A", "B");
     }
 
     public void move(int row, int colum, Object reference) {
@@ -55,7 +53,7 @@ public class Controller {
      * aus: Gui -> keine Aktion (Methode Beenden und auf nächste Eingabe warten)
      *      KI  -> Die KI führt einen Zug aus Es wird ausserdem überprüft ob die
      * maximale Punktzahl erreicht wurde.
-     *///(gameField.getMatrixSize() - 1) / 2)
+     */
     private void nextMove() {
         Object activePlayer = null;
         if (player1.getIsActive()) {
@@ -79,6 +77,7 @@ public class Controller {
             player2.setIsActive(false);
             PrintOut print = new PrintOut(gameField.getMatrixSize(), gameField.getBoxMatrix(), gameField.getLineMatrix());
             print.printMatrix();
+            System.out.println(this.toString());
         }
     }
 
@@ -131,6 +130,14 @@ public class Controller {
 
        // gui.update();
     }
+    
+    @Override
+    public String toString(){
+        String string;
+        string = gameVariant.getModi() + " " + (gameField.getMatrixSize() - 1)/2 + " " + player1.getName() + " " + player2.getName();
+        return string;
+    }
+    
 
     public static void main(String[] args) {
         Controller controller = new Controller();
