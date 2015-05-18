@@ -8,6 +8,7 @@ package ch.hslu.prg2.model;
 import java.awt.Color;
 import java.util.Scanner;
 
+
 /**
  * Klasse um textbasiertes Spiel zu testen.
  * @author luciusschaerer
@@ -36,7 +37,7 @@ public class TextModel {
             System.out.println("Ungültige Eingabe.");
         }
             
-        print.PrintMatrix();
+        print.printMatrix();
         
         }
     }
