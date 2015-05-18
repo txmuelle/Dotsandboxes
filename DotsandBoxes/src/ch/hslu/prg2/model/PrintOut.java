@@ -47,7 +47,7 @@ public class PrintOut {
                         System.out.print("|" + row + column + this.linematrix[row][column].getOwner().getName() + "|\t" );
                         }
                    else{
-                        System.out.print( "|"+ row + column + this.boxmatrix[row][column].getOwner().getName() + "|\t" );
+                        System.out.print( " "+ row + column + this.boxmatrix[row][column].getOwner().getName() + " \t" );
                         this.boxcounter++;
                         }
                 }
@@ -55,14 +55,14 @@ public class PrintOut {
                    catch(NullPointerException e){
                        
                    if(row % 2 == 0 && column % 2 == 0){
-                   System.out.print("   *   ");
+                   System.out.print("  *  \t");
                    }
                    else{
                        if(row % 2 == 0){
-                      System.out.print("|\t|");
+                      System.out.print("|---|\t");
                        }
                        else{
-                      System.out.print("|\t|"); 
+                      System.out.print("|---|\t"); 
                        }
                    }   
                  }
