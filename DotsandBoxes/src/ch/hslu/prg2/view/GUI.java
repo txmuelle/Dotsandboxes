@@ -62,7 +62,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private int size;
     private int boxSize;
     private int dotSize;
-    private int [][] lines;
+    private int[][] lines;
 
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
@@ -95,10 +95,14 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         //intial Frame
         super("Dots and Boxes");
 
-
+        //GameField dimensionieren
         this.gameField = gameField;
         this.controller = controller;
         this.Player = Player;
+        this.size = gameField.getMatrixSize();
+        this.rows = size;
+        this.cols = size;
+        this.boxSize = 550 / cols;
 
         //playboard  und Frame zeichnen
         paintPlayBoard();
@@ -110,7 +114,6 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         register();
 
         //Sichtbar machen
-
         setVisible(true);
     }
 
@@ -118,12 +121,11 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         //intial Frame
         super("Dots and Boxes");
 
-
         //playboard  und Frame zeichnen
         this.size = 5;
         this.rows = size;
         this.cols = size;
-        boxSize = 550/cols;
+        boxSize = 550 / cols;
         paintPlayBoard();
 
         //MenuBar
@@ -191,37 +193,34 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                
-                for (int y = 0; y <= rows+1; y++) {
-                    for (int x = 0; x <= cols+1; x++) {
-                        
-                        
-                        //Draw Senkrechte Striche
-                        if((x <cols+1) && y<rows  ){
-                        //Striche mit der richtigen Farbe füllen
-                        //Player player = GameField.getGridPosition(x, y);
-                        g.setColor(Color.LIGHT_GRAY);
-                        
-                        g.fillRect(((int) x * boxSize) + 13*boxSize/100, ((int) (y * boxSize)) + 35*boxSize/100, 5*boxSize/100, 70*boxSize/100);
-                        }
-                        
-                        //Draw Waagrechte Striche
-                        if( (y <rows+1)&& x<cols ){                        
-                        //Striche mit der richtigen Farbe füllen
-                        //Player player = GameField.getGridPosition(x, y);
-                        
-                        g.setColor(Color.LIGHT_GRAY);
+                for (int y = 0; y <= rows + 1; y++) {
+                    for (int x = 0; x <= cols + 1; x++) {
 
-                        g.fillRect(((int) x * boxSize) + 33*boxSize/100, ((int) (y * boxSize) ) + 18*boxSize/100, 70*boxSize/100, 5*boxSize/100);}
+                        //Draw Senkrechte Striche
+                        if ((x < cols + 1) && y < rows) {
+                        //Striche mit der richtigen Farbe füllen
+                            //Player player = GameField.getGridPosition(x, y);
+                            g.setColor(Color.LIGHT_GRAY);
+
+                            g.fillRect(((int) x * boxSize) + 13 * boxSize / 100, ((int) (y * boxSize)) + 35 * boxSize / 100, 5 * boxSize / 100, 70 * boxSize / 100);
+                        }
+
+                        //Draw Waagrechte Striche
+                        if ((y < rows + 1) && x < cols) {
+                        //Striche mit der richtigen Farbe füllen
+                            //Player player = GameField.getGridPosition(x, y);
+
+                            g.setColor(Color.LIGHT_GRAY);
+
+                            g.fillRect(((int) x * boxSize) + 33 * boxSize / 100, ((int) (y * boxSize)) + 18 * boxSize / 100, 70 * boxSize / 100, 5 * boxSize / 100);
+                        }
                     }
                 }
-                 
-
 
                 //Draw Boxes
                 //Die Boxen zeichen und jenach Spielverlauf einfärben X O
                 for (int y = 0; y < rows; y++) {
-                    for (int x = 0; x <cols ; x++) {
+                    for (int x = 0; x < cols; x++) {
 
                         boolean redplayer = true;
                         //Kreise mit der richtigen Farbe füllen
@@ -229,36 +228,36 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                         if (redplayer) {
                             g.setColor(Color.red);
 
-                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
                             g.setColor(getBackground());
-                            g.fillArc(((int) x * boxSize) + 30*boxSize/100+ 5*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100+5*boxSize/100, 60*boxSize/100, 60*boxSize/100, 0, 360);
-                        } else  {
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60 * boxSize / 100, 60 * boxSize / 100, 0, 360);
+                        } else {
 
                             g.setColor(Color.blue);
 
-                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 0, 360);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
                             g.setColor(getBackground());
                             // east
-                            g.fillArc(((int) x * boxSize) + 36*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, -45, 90);
+                            g.fillArc(((int) x * boxSize) + 36 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -45, 90);
                             // west
-                            g.fillArc(((int) x * boxSize) + 24*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100, 70*boxSize/100, 70*boxSize/100, 135, 90);
+                            g.fillArc(((int) x * boxSize) + 24 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 135, 90);
                             // north
-                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100-6*boxSize/100, 70*boxSize/100, 70*boxSize/100, 45, 90);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 - 6 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 45, 90);
                             // south
-                            g.fillArc(((int) x * boxSize) + 30*boxSize/100, ((int) (y * boxSize) ) + 30*boxSize/100+6*boxSize/100, 70*boxSize/100, 70*boxSize/100, -135, 90);
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -135, 90);
                         }
                     }
                 }
 
                 // DRAW DOTS
                 g.setColor(this.dotColor);
-                for (int y = 0; y < rows+1; y++) {
-                    for (int x = 0; x < cols+1; x++) {
-                        
+                for (int y = 0; y < rows + 1; y++) {
+                    for (int x = 0; x < cols + 1; x++) {
+
                         //Kreise mit der richtigen Farbe füllen
                         g.setColor(Color.black);
 
-                        g.fillArc(((int) x * boxSize) + (10*boxSize/100), ((int) (y * boxSize) ) + 15*boxSize/100, 10*boxSize/100, 10*boxSize/100, 0, 360);
+                        g.fillArc(((int) x * boxSize) + (10 * boxSize / 100), ((int) (y * boxSize)) + 15 * boxSize / 100, 10 * boxSize / 100, 10 * boxSize / 100, 0, 360);
                     }
                 }
 
@@ -290,9 +289,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         //Frame Location
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        
+
         xFramePos = (dim.width - super.getSize().width) / 2;
-        
+
         yFramePos = (dim.height - super.getSize().height) / 2;
         super.setLocation(xFramePos, yFramePos);
 
@@ -338,7 +337,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         this.menuFile.add(miFileExit);
         miFileExit.addActionListener(this);
         this.menuBar.add(menuFile);
-        
+
         //Onlinegame Menu
         this.menuGame.add(miGameHost);
         this.menuGame.add(miGameJoin);
@@ -375,18 +374,18 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         getNearest(e.getX(), e.getY());
         // pass the event to state machine
         //Controller.mousePressed(nearx, neary);
-
+        
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
        // lookup line nearest to the mouse pointer
-    
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-    
+
     }
 
     @Override
@@ -409,85 +408,106 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     }
 
-    private void getNearest(int x, int y) {
-        
+    private int getNearest(int x, int y) {
+
         // find the mouse position relative to the field origin
-		x -= xFramePos - 17;
-		y -= xFramePos - 66;
-		// mouse is over the box at this row and column
-		int col = x / boxSize;
-		int row = y / boxSize;
+        x -= xFramePos - 17;
+        y -= xFramePos - 66;
+        // mouse is over the box at this row and column
+        int col = x / boxSize;
+        int row = y / boxSize;
 
-		// clamp point into field
-		if (col < 0) col = 0;
-		if (col >= this.cols) col = this.cols - 1;
-		if (row < 0) row = 0;
-		if (row >= this.rows) row = this.rows - 1;
-                
+        // clamp point into field
+        if (col < 0) {
+            col = 0;
+        }
+        if (col >= this.cols) {
+            col = this.cols - 1;
+        }
+        if (row < 0) {
+            row = 0;
+        }
+        if (row >= this.rows) {
+            row = this.rows - 1;
+        }
+
 		// the nearest box
-		//Box nearestBox = this.box[col][row];
+        //Box nearestBox = this.box[col][row];
+        // find mouse position relative to the box's origin
+        x -= boxSize * col;
+        y -= boxSize * row;
 
-		// find mouse position relative to the box's origin
-		x -= boxSize * col;
-		y -= boxSize * row;   
-                
-                // Box finden
-                if( col == 0) col = 1;
-                else{col+=col+1;}
-                if( row == 0) row = 1;
-                else{row+=row+1;}
-                
-                //Linie finden
-                int lineCol=0;
-                int lineRow=0;
-                if (x < boxSize/8) lineCol= col-1;
-                else if (x > 7*boxSize/8) lineCol= col+1;
-                else lineCol = col;
-                if (y < boxSize/8) lineRow = row-1;
-                else if (y > 7*boxSize/8) lineRow = row+1;
-                else lineRow = row;
-                // Infos an Gamemanager weitergeben
-                
+        // Box finden
+        if (col == 0) {
+            col = 1;
+        } else {
+            col += col + 1;
+        }
+        if (row == 0) {
+            row = 1;
+        } else {
+            row += row + 1;
+        }
 
-        System.out.println("x: "+x + "  y: "+y + " col: " +col+"  row: "+row + "  line; " + lineCol + " x  "+lineRow+" y");
-        
+        //Linie finden
+        int lineCol = 0;
+        int lineRow = 0;
+        if (x < boxSize / 8) {
+            lineCol = col - 1;
+        } else if (x > 7 * boxSize / 8) {
+            lineCol = col + 1;
+        } else {
+            lineCol = col;
+        }
+        if (y < boxSize / 8) {
+            lineRow = row - 1;
+        } else if (y > 7 * boxSize / 8) {
+            lineRow = row + 1;
+        } else {
+            lineRow = row;
+        }
+
+                //Boxen und Punkte ignorieren
+        if ((x % 2 == 0) && (y % 2 == 0)) {
+            return -1;
+        }
+        if (!(x % 2 == 0) && !(y % 2 == 0)) {
+            return -1;
+        } // Infos an Gamemanager weitergeben
+        else {
+            System.out.println("line; " + lineCol + " x  " + lineRow + " y");
+            //this.controller.move(row, col, this);
+            return 1;
+        }
     }
 
-    private int getNearestY(int y) {
 
-        return y;
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         // New Game menu item was selected
-		if (e.getActionCommand().equals("New Game")) {
-			// show modal new game dialog box
-			//newGameDialog.showDialog();
-		}
-
-		// How to Play menu item was selected
-		else if (e.getActionCommand().equals("Rules")) {
-			// show the instructional modal dialog box
-			JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT, "How To Play",
-					JOptionPane.PLAIN_MESSAGE);
-		}
-
-		// About menu item was selected
-		else if (e.getActionCommand().equals("About")) {
-			// show the modal about box
-			JOptionPane.showMessageDialog(this, ABOUTTEXT,
-					"About Dots and Boxes", JOptionPane.PLAIN_MESSAGE);
-		}
-
-		// Exit menu item was selected
-		else if (e.getActionCommand().equals("Exit")) {
+        if (e.getActionCommand().equals("New Game")) {
+            // show modal new game dialog box
+            //newGameDialog.showDialog();
+            //new Game
+            //this.controller.startGame(2, 4, "Blue", "Red");
+        } // How to Play menu item was selected
+        else if (e.getActionCommand().equals("Rules")) {
+            // show the instructional modal dialog box
+            JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT, "How To Play",
+                    JOptionPane.PLAIN_MESSAGE);
+        } // About menu item was selected
+        else if (e.getActionCommand().equals("About")) {
+            // show the modal about box
+            JOptionPane.showMessageDialog(this, ABOUTTEXT,
+                    "About Dots and Boxes", JOptionPane.PLAIN_MESSAGE);
+        } // Exit menu item was selected
+        else if (e.getActionCommand().equals("Exit")) {
 			// dispose of the main window. Java VM will exit if there are no
-			// other threads or windows.
-			this.dispose();
-		}
+            // other threads or windows.
+            this.dispose();
+        }
     }
 
 }
