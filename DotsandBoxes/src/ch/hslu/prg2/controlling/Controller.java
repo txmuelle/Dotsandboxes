@@ -28,8 +28,10 @@ public class Controller {
     private RandomKI randomKi;
 
     public Controller() {
-        //GUI gui = new GUI(gameField, this, player1, player2, gameVariant);
-        startGame(0, 2, "A", "B");
+        
+
+        this.startGame(0, 6, "A", "B");
+        //startGame(0, 2, "A", "B");
     }
 
     public boolean move(int row, int colum, Object reference) {
@@ -45,7 +47,7 @@ public class Controller {
             } else {
                 return false;
             }
-//            gui.update();
+           gui.update();
             nextMove();
             return true;
         } else {
@@ -73,7 +75,9 @@ public class Controller {
 
             } else if (activePlayer.equals(randomKi)) {
                 ArrayList<Integer> coordinates = randomKi.kiMove(gameField);
+                gui.update();
                 move(coordinates.get(0), coordinates.get(1), activePlayer);
+                
             }
             // Einfügen von weiteren Spieler Klassen. z.B. Network Player
             //else if (activePlayer == networkPlayer) {}
@@ -132,9 +136,10 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
+        this.gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
         nextMove();
 
-       // gui.update();
+       gui.update();
     }
 
     public static void main(String[] args) {
