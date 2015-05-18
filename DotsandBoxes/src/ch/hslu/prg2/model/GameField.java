@@ -6,7 +6,6 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
-import java.util.Scanner;
 
 
 /**
