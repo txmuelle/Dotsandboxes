@@ -147,7 +147,7 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
-        
+
         this.gui.update();
         nextMove();
 
@@ -158,17 +158,6 @@ public class Controller {
         String string;
         string = gameVariant.getModi() + " " + (gameField.getMatrixSize() - 1) / 2 + " " + player1.getName() + " " + player2.getName();
         return string;
-    }
-
-    /**
-     * Zeit dem Gui an wer Spieler eins ist ( wird benötigt um die Boxen richtig
-     * zuzuweisen)
-     *
-     * @return den player1
-     */
-    public Player getPayer1() {
-
-        return player1;
     }
 
     /**
