@@ -74,5 +74,8 @@ public class Player
         this.score++;
     }
     
-    
+    @Override
+    public String toString(){
+        return (name + " "+ color + " "+ score+" "+ isActive +" ");
+    }
 }
