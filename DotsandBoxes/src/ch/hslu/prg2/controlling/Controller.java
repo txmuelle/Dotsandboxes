@@ -157,6 +157,11 @@ public class Controller {
         return string;
     }
     
+    public Player getPayer1(){
+    
+        return player1;
+    }
+    
 
     public static void main(String[] args) {
         Controller controller = new Controller();

@@ -250,37 +250,29 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 for (int y = 0; y < rows; y++) {
                     for (int x = 0; x < cols; x++) {
 
-                        boolean redplayer = false;
+                        
                         //Kreise mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         int xcol;
                         int yrow;
                         //Linie finden
 
-                        /*                        if (x == 0) {
+      
                          yrow = 2 * y + 1;
-                         xcol = x+x+1;
-                         } else {
-                         yrow = 2 * y + 1;
-                         xcol = 2 * x;
-                         }
+                         xcol = 2 * x+1;
+                         
                         
                          if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
-                         Color col = gameField.getLineColor(yrow, xcol);
+                         Color col = gameField.getBoxColor(yrow, xcol);
                          g.setColor(col);
-                         }*/
-                        if (redplayer) {
-                            g.setColor(Color.red);
+                         Player owner = gameField.getBoxOwner(yrow, cols);
+                         Player pl1 = controller.getPayer1();
+                         
+                         
+                        if (pl1 == owner) {
+                            
 
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
-                            g.setColor(getBackground());
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5
-                                    * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60
-                                    * boxSize / 100, 60 * boxSize / 100, 0, 360);
-                        } else {
-
-                            g.setColor(Color.blue);
-
+                            
                             g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
                             g.setColor(getBackground());
                             // east
@@ -293,7 +285,16 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                             // south
                             g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70
                                     * boxSize / 100, -135, 90);
+                        } else {
+                            
+                            
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
+                            g.setColor(getBackground());
+                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5
+                                    * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60
+                                            * boxSize / 100, 60 * boxSize / 100, 0, 360);
                         }
+                         }
                     }
                 }
 

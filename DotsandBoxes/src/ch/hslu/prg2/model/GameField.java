@@ -102,6 +102,10 @@ public class GameField implements IGameField {
     public Color getBoxColor(int row, int column) {
         return boxmatrix[row][column].getBoxColor();
     }
+    
+    public Player getBoxOwner(int row, int column){
+        return boxmatrix[row][column].getOwner();
+    }
 
     /**
      * Gibt die Farbe der Line zurück.
