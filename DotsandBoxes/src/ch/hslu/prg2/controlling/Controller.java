@@ -31,16 +31,34 @@ public class Controller {
         startGame(0, 3, "A", "B");
     }
 
+    /**
+     * Führt einen Spielzug aus. Überprüft wer den Zug machen will und ob dieser 
+     * an der Reihe ist. Wenn sich der Score des Spielers nach dem Zug nicht
+     * verändert wird der aktuelle Player auf inaktiv gesetzt. Wenn sich der
+     * Score verändert bleibt er aktiv und kann noch einen Zug machen.
+     * @param row
+     * @param colum
+     * @param reference
+     */
     public void move(int row, int colum, Object reference) {
+        int score;
         if (!gameField.isLineDrawed(row, colum)) {
             if (player1.getReference() == reference && player1.getIsActive()) {
+                score = player1.getScore();
                 gameField.setLine(row, colum, player1);
-                player1.setIsActive(false);
-                player2.setIsActive(true);
+                if(score == player1.getScore()){
+                    player1.setIsActive(false);
+                    player2.setIsActive(true);
+                }else{}
+                
             } else if (player2.getReference() == reference && player2.getIsActive()) {
+                score = player2.getScore();
                 gameField.setLine(row, colum, player2);
-                player2.setIsActive(false);
-                player1.setIsActive(true);
+                if(score == player2.getScore()){
+                    player2.setIsActive(false);
+                    player1.setIsActive(true);
+                } else{}
+                
             } else {}
 //            gui.update();
             nextMove();
