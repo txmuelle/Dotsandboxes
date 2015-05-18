@@ -265,7 +265,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                          if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
                          Color col = gameField.getBoxColor(yrow, xcol);
                          g.setColor(col);
-                         Player owner = gameField.getBoxOwner(yrow, cols);
+                         Player owner = gameField.getBoxOwner(yrow, xcol);
                          Player pl1 = controller.getPayer1();
                          
                          
