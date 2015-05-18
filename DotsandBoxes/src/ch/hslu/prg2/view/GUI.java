@@ -198,6 +198,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                super.setBackground(Color.WHITE);
 
                 for (int y = 0; y <= rows + 1; y++) {
                     for (int x = 0; x <= cols + 1; x++) {
@@ -218,7 +219,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                             }
 
                             //g.setColor(Color.LIGHT_GRAY);
-                            g.fillRect(((int) x * boxSize) + 13 * boxSize / 100,((int) (y * boxSize)) + 35 * boxSize / 100, 5 * boxSize / 100, 70 * boxSize / 100);
+                            g.fillRect(((int) x * boxSize) + 13 * boxSize / 100, ((int) (y * boxSize)) + 35 * boxSize / 100, 5 * boxSize / 100, 70 * boxSize / 100);
                         }
 
                         //Draw Waagrechte Striche
@@ -250,51 +251,44 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 for (int y = 0; y < rows; y++) {
                     for (int x = 0; x < cols; x++) {
 
-                        
                         //Kreise mit der richtigen Farbe füllen
                         //Player player = GameField.getGridPosition(x, y);
                         int xcol;
                         int yrow;
                         //Linie finden
 
-      
-                         yrow = 2 * y + 1;
-                         xcol = 2 * x+1;
-                         
-                        
-                         if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
-                         Color col = gameField.getBoxColor(yrow, xcol);
-                         g.setColor(col);
-                         Player owner = gameField.getBoxOwner(yrow, xcol);
-                         //Player pl1 = controller.getPayer1();
-                         
-                         
-                        if (player1 == owner) {
-                            
+                        yrow = 2 * y + 1;
+                        xcol = 2 * x + 1;
 
-                            
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
-                            g.setColor(getBackground());
-                            // east
-                            g.fillArc(((int) x * boxSize) + 36 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -45, 90);
-                            // west
-                            g.fillArc(((int) x * boxSize) + 24 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 135, 90);
-                            // north
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 - 6 * boxSize / 100, 70 * boxSize / 100, 70
-                                    * boxSize / 100, 45, 90);
-                            // south
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70
-                                    * boxSize / 100, -135, 90);
-                        } else {
-                            
-                            
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
-                            g.setColor(getBackground());
-                            g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5
-                                    * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60
-                                            * boxSize / 100, 60 * boxSize / 100, 0, 360);
+                        if (!(xcol % 2 == 0) && !(yrow % 2 == 0)) {
+                            Color col = gameField.getBoxColor(yrow, xcol);
+                            g.setColor(col);
+                            Player owner = gameField.getBoxOwner(yrow, xcol);
+                         
+
+                            if (player1 == owner) {
+
+                                g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
+                                g.setColor(getBackground());
+                                // east
+                                g.fillArc(((int) x * boxSize) + 36 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, -45, 90);
+                                // west
+                                g.fillArc(((int) x * boxSize) + 24 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 135, 90);
+                                // north
+                                g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 - 6 * boxSize / 100, 70 * boxSize / 100, 70
+                                        * boxSize / 100, 45, 90);
+                                // south
+                                g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 6 * boxSize / 100, 70 * boxSize / 100, 70
+                                        * boxSize / 100, -135, 90);
+                            } else {
+
+                                g.fillArc(((int) x * boxSize) + 30 * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100, 70 * boxSize / 100, 70 * boxSize / 100, 0, 360);
+                                g.setColor(getBackground());
+                                g.fillArc(((int) x * boxSize) + 30 * boxSize / 100 + 5
+                                        * boxSize / 100, ((int) (y * boxSize)) + 30 * boxSize / 100 + 5 * boxSize / 100, 60
+                                        * boxSize / 100, 60 * boxSize / 100, 0, 360);
+                            }
                         }
-                         }
                     }
                 }
 
@@ -309,9 +303,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                         g.fillArc(((int) x * boxSize) + (10 * boxSize / 100), ((int) (y * boxSize)) + 15 * boxSize / 100, 10 * boxSize / 100, 10 * boxSize / 100, 0, 360);
                     }
                 }
-                
-                                //bei Spielende das "Game over" - Fenster zeichnen
-                if(controller.isGameOver()){
+
+                //bei Spielende das "Game over" - Fenster zeichnen
+                if (controller.isGameOver()) {
                     g.setColor(Color.black);
                     g.drawRoundRect(49, 149, 602, 202, 8, 8);
                     g.setColor(new Color(181, 181, 181, 200));
@@ -323,10 +317,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                     Font info = new Font(Font.DIALOG, 1, 40);
                     g.setFont(info);
                     g.setColor(Color.black);
-                    String WinnerName = "A";
-                         //col player1.getScore()
-                    g.drawString("  Winner is: "+WinnerName, 60, 300);
-
+                    /*                    String WinnerName= " ";
+                    if (player1.getScore() > player2.getScore()) {
+                    WinnerName = player1.getName();
+                    } else {
+                    WinnerName = player2.getName();
+                    }
+                    g.drawString("  Winner is: " + WinnerName, 60, 300);*/
                     placeholder1.repaint();
                     placeholder2.repaint();
                 }
@@ -598,6 +595,11 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             this.playBoard.repaint();
 
         }
+    }
+
+    public void setPlayer(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
 }

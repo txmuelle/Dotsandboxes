@@ -29,7 +29,7 @@ public class Controller {
 
     public Controller() {
 
-        startGame(1, 3, "A", "B");
+        startGame(2, 3, "A", "B");
     }
 
     /**
@@ -147,7 +147,7 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
-
+        this.gui.setPlayer(this.player1, this.player2);
         this.gui.update();
         nextMove();
 
