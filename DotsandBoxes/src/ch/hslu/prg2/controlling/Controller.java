@@ -27,7 +27,7 @@ public class Controller {
     private RandomKI randomKi;
 
     public Controller() {
-        //GUI gui = new GUI(gameField, this, player1, player2, gameVariant);
+        
         startGame(0, 3, "A", "B");
     }
 
@@ -60,7 +60,7 @@ public class Controller {
                 } else{}
                 
             } else {}
-//            gui.update();
+            gui.update();
             nextMove();
         } else {}
     }
@@ -144,9 +144,10 @@ public class Controller {
                 this.player2 = new Player(player2, color2, randomKi, false);
                 break;
         }
+        GUI gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
+        gui.update();
         nextMove();
 
-       // gui.update();
     }
     
     @Override
