@@ -53,6 +53,7 @@ public class Boxes {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+        this.boxColor = owner.getColor();
     }
 
     public void setBoxColor(Color boxColor) {
