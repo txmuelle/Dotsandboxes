@@ -10,11 +10,14 @@ import ch.hslu.prg2.model.Boxes;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.Lines;
 import ch.hslu.prg2.model.Player;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -94,8 +97,16 @@ public class GameMemory {
     
     public void loadGame(){
         if(file.exists()){
-            try(){
-                
+            try(BufferedReader buffRead = new BufferedReader(new FileReader(file))){
+                for(int i = 0; i < 4;i++){
+                  StringTokenizer st = new StringTokenizer(buffRead.readLine());  
+                  System.out.println(buffRead.readLine());
+                  
+                  while(st.hasMoreTokens()){
+                      
+                  }
+                  
+                }
             }
             catch(IOException ioe){
                 
