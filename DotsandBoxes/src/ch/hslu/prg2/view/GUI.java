@@ -385,7 +385,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         };
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1000, 700);
+        setSize(950, 750);
         setResizable(false);
 
         //Frame Location
@@ -420,7 +420,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         //Play Board
         this.display2.add(playBoard, BorderLayout.CENTER);
-        this.playBoard.setPreferredSize(new Dimension(600, 400));
+        this.playBoard.setPreferredSize(new Dimension(500, 500));
         this.playBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
     }
@@ -534,8 +534,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private int getNearest(int x, int y) {
 
         // find the mouse position relative to the field origin
-        x -= 27; 
-        y -= 36;
+        x -= (boxSize/6.8);
+        y -= (boxSize/5.05);
         System.out.println(x +" "+ y);
         // mouse is over the box at this row and column
         int col = x / boxSize;
