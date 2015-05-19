@@ -586,7 +586,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             // show the dialog
             newGameDialog.showDialog();
             newGameDialog.startGame(this.controller);
-
+            this.dispose();
             //new Game
             //this.controller.startGame(2, 4, "Blue", "Red");
         } // How to Play menu item was selected
