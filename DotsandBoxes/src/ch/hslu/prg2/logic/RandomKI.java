@@ -6,6 +6,7 @@
 package ch.hslu.prg2.logic;
 
 import ch.hslu.prg2.model.GameField;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ import java.util.Random;
  *
  * @author Jordan Klaus
  */
-public class RandomKI {
+public class RandomKI implements Serializable{
         
         private GameField gamefield;
         

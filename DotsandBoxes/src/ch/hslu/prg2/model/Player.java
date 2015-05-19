@@ -6,13 +6,14 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author Schaerer Lucius und Klaus "Schnupfer"
  */
 
-public class Player
+public class Player implements Serializable
 {
     
     private String name;
@@ -76,6 +77,6 @@ public class Player
     
     @Override
     public String toString(){
-        return (name + " "+ color + " "+ score+" "+ isActive +" ");
+        return (color.getRGB() + " "+ score+" "+ isActive +" ");
     }
 }

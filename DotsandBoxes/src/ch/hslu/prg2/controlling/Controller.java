@@ -12,18 +12,19 @@ import ch.hslu.prg2.model.Player;
 import ch.hslu.prg2.model.PrintOut;
 import ch.hslu.prg2.view.GUI;
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Adrian Ruckli, Patrick Rossacher
  */
-public class Controller {
+public class Controller implements Serializable{
 
-    private GUI gui;
+    private transient GUI gui;
     private GameField gameField;
     private Player player1, player2;
-    private GameVariant gameVariant;
+    private transient GameVariant gameVariant;
     private RandomKI randomKi;
     private boolean GameOver;
 
@@ -172,4 +173,58 @@ public class Controller {
     public static void main(String[] args) {
         Controller controller = new Controller();
     }
+
+    public GUI getGui() {
+        return gui;
+    }
+
+    public GameField getGameField() {
+        return gameField;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public GameVariant getGameVariant() {
+        return gameVariant;
+    }
+
+    public RandomKI getRandomKi() {
+        return randomKi;
+    }
+
+    public void setGui(GUI gui) {
+        this.gui = gui;
+    }
+
+    public void setGameField(GameField gameField) {
+        this.gameField = gameField;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public void setGameVariant(GameVariant gameVariant) {
+        this.gameVariant = gameVariant;
+    }
+
+    public void setRandomKi(RandomKI randomKi) {
+        this.randomKi = randomKi;
+    }
+
+    public void setGameOver(boolean GameOver) {
+        this.GameOver = GameOver;
+    }
+    
+    
 }

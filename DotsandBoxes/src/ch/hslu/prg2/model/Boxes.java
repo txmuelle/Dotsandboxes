@@ -6,12 +6,13 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author luciusschaerer
  */
-public class Boxes {
+public class Boxes implements Serializable{
     
     private int counter;
     private Player owner;

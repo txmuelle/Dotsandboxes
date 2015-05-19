@@ -6,12 +6,13 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author luciusschaerer
  */
-public class Lines {
+public class Lines implements Serializable {
     
     private Player owner;
     private Color color;

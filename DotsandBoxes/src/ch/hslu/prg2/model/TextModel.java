@@ -27,7 +27,7 @@ public class TextModel {
     Player p2 = new Player("P1",Color.BLACK,null,true);
     GameVariant var = new GameVariant(0);
     PrintOut print = new PrintOut(g.getMatrixSize(),g.getBoxMatrix(),g.getLineMatrix());
-    GameMemory memo = new GameMemory(g,p,p2,var);
+    GameMemory memo = new GameMemory(g,p,p2,1);
     Scanner scan = new Scanner(System.in);
     g.setLine(0, 1, p);
     g.setLine(1,2,p2);

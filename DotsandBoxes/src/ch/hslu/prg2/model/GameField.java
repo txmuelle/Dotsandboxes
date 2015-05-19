@@ -6,6 +6,7 @@
 package ch.hslu.prg2.model;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 
 /**
@@ -15,12 +16,13 @@ import java.awt.Color;
  */
 
 
-public class GameField implements IGameField {
+public class GameField implements IGameField, Serializable {
     
     private Lines[][] linematrix;
     private Boxes[][] boxmatrix;
     private int matrixSize;
     private boolean gameOver;
+    private Boxes box;
 
     
     
@@ -31,6 +33,7 @@ public class GameField implements IGameField {
         fillLineMatrix();
         fillBoxMatrix();
         gameOver = false;
+        
     }
     
     
@@ -179,6 +182,10 @@ public class GameField implements IGameField {
     @Override
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public Boxes getBox() {
+        return box;
     }
     
     
