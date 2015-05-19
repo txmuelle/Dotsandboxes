@@ -76,11 +76,11 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     final String HOWTOPLAYTEXT = "How To Play\r\n" + "\r\n"
             + "The game consists of a field of dots.  Take turns with the\r\n"
             + "computer adding lines between the dots.  Complete a box to\r\n"
-            + "get another turn.  Your boxes will show O.  The computer's\r\n"
-            + "boxes get X.  Complete the most boxes to win!\r\n";
+            + "get another turn.  \r\n"
+            + "Complete the most boxes to win!\r\n";
 
     // about box text
-    final String ABOUTTEXT = "Dots and Boxes is a Java program written by "
+    final String ABOUTTEXT = "Dots and Boxes is a Java program written by\r\n "
             + "\r\n"
             + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli Adrian\r\n"
             + "\r\n"
@@ -303,9 +303,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 //bei Spielende das "Game over" - Fenster zeichnen
                 if (controller.isGameOver()) {
                     g.setColor(Color.black);
-                    g.drawRoundRect(49, 149, 602, 202, 8, 8);
+                    g.drawRoundRect(20, 149, 602, 202, 8, 8);
                     g.setColor(new Color(181, 181, 181, 200));
-                    g.fillRoundRect(50, 150, 600, 200, 8, 8);
+                    g.fillRoundRect(21, 150, 600, 200, 8, 8);
                     Font f = new Font(Font.SANS_SERIF, 1, 100);
                     g.setFont(f);
                     g.setColor(Color.red);
@@ -416,19 +416,20 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         miFileExit.addActionListener(this);
         this.menuBar.add(menuFile);
 
-        //Onlinegame Menu
+        /*//Onlinegame Menu
         this.menuGame.add(miGameHost);
         this.menuGame.add(miGameJoin);
         this.menuGame.add(miUDPGameHost);
         this.menuGame.add(miUDPGameSearch);
-        this.menuBar.add(menuGame);
+        this.menuBar.add(menuGame);*/          //because it's not working yet
+        
         //Help Menu
-        this.menuHelp.add(miHelpAbout);
-        miHelpAbout.addActionListener(this);
         this.menuHelp.add(miHelpRules);
         miHelpRules.addActionListener(this);
+        this.menuHelp.addSeparator();
+        this.menuHelp.add(miHelpAbout);
+        miHelpAbout.addActionListener(this);
         this.menuBar.add(menuHelp);
-
         setJMenuBar(menuBar);
     }
 
@@ -437,9 +438,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
      */
     private void register() {
 
-        playBoard.addMouseListener(this);
-        // this.addMouseListener(this); // Versuchen add an Panel
-        //this.addMouseMotionListener(this);
+        playBoard.addMouseListener(this);// Versuchen add an Panel
+        // this.addMouseListener(this); 
 
     }
 
@@ -459,10 +459,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         // lookup line nearest to the mouse pointer
 
         getNearest(e.getX(), e.getY());
-        System.out.println("mousclickt");
-        // pass the event to state machine
-        //Controller.mousePressed(nearx, neary);
-
+        //System.out.println("mousclickt");
+        
     }
 
     @Override
@@ -582,7 +580,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         // New Game menu item was selected
         if (e.getActionCommand().equals("New Game")) {
-            newGameDialog = new NewGameDialog(this);
+            newGameDialog = new NewGameDialog(this, this.player1.getName(),this.player2.getName());
             // show the dialog
             newGameDialog.showDialog();
             newGameDialog.startGame(this.controller);
