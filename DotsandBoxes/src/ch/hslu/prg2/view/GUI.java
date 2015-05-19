@@ -465,8 +465,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
      */
     private void register() {
 
-        // listen to own mouse input
-        this.addMouseListener(this);
+        playBoard.addMouseListener(this); 
+       // this.addMouseListener(this); // Versuchen add an Panel
         //this.addMouseMotionListener(this);
 
     }
@@ -485,7 +485,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     public void mouseClicked(MouseEvent e) {
         int nearx, neary;
         // lookup line nearest to the mouse pointer
+        
         getNearest(e.getX(), e.getY());
+        System.out.println("mousclickt");
         // pass the event to state machine
         //Controller.mousePressed(nearx, neary);
 
@@ -532,8 +534,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private int getNearest(int x, int y) {
 
         // find the mouse position relative to the field origin
-        x -= xFramePos - 17;
-        y -= xFramePos - 66;
+        x -= 27; 
+        y -= 36;
+        System.out.println(x +" "+ y);
         // mouse is over the box at this row and column
         int col = x / boxSize;
         int row = y / boxSize;
@@ -589,10 +592,10 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         }
 
         //Boxen und Punkte ignorieren
-        if ((x % 2 == 0) && (y % 2 == 0)) {
+        if ((lineRow % 2 == 0) && (lineCol % 2 == 0)) {
             return -1;
         }
-        if (!(x % 2 == 0) && !(y % 2 == 0)) {
+        if (!(lineRow % 2 == 0) && !(lineCol % 2 == 0)) {
             return -1;
         } // Infos an Gamemanager weitergeben
         else {
