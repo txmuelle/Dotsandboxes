@@ -6,6 +6,7 @@
 package ch.hslu.prg2.memory;
 
 import ch.hslu.prg2.controlling.Controller;
+import ch.hslu.prg2.view.GUI;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,15 +51,5 @@ public class Memory implements Serializable {
         }
         return controller;
     }
-    
-   public static void main(String [] args){
-        Controller c =new Controller();
-        c.startGame(0, 2, "Lucius", "Klaus");
-        Memory m = new Memory(c);
-        m.saveGame();
-        Controller A = new Controller();
-        A = m.openGame();
-        System.out.println(A.getGameField().getBoxOwner(1, 1));
-    }
-         
+     
 }
