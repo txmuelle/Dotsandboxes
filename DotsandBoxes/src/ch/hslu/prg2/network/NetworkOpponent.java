@@ -59,7 +59,6 @@ public class NetworkOpponent {
         }
     }
     
-    //
     
     public byte[] read(File file) throws IOException {
 
