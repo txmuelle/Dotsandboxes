@@ -33,7 +33,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     JMenu menuFile = new JMenu("File");
     JMenu menuGame = new JMenu("online Game");
     JMenu menuHelp = new JMenu("Help");
-    JMenuItem miFileNew = new JMenu("New Game");
+    JMenuItem miFileNew = new JMenuItem("New Game");
     JMenuItem miFileNewEasy = new JMenuItem("Easy");
     JMenuItem miFileNewHard = new JMenuItem("Hard");
     JMenuItem miFileLoad = new JMenuItem("Load Game");
@@ -66,6 +66,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private Color dotColor = Color.BLACK;
     private int[][] lines;
 
+    //NewGameDialog
+    private NewGameDialog newGameDialog;
+
     //Fonts
     private Font playerFont = new Font(Font.DIALOG, 1, 16);
 
@@ -78,10 +81,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     // about box text
     final String ABOUTTEXT = "Dots and Boxes is a Java program written by "
+            + "\r\n"
             + "Jordan Klaus, Müller Urs, Rossacher Patrick, Schärer Lucius, Ruckli Adrian\r\n"
             + "\r\n"
             + "This was a project in PRG2 Hochschule Luzern FS15\r\n"
             + "\r\n";
+    
+    //Controller
     private Controller controller;
 
     /**
@@ -118,34 +124,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         //Sichtbar machen
         setVisible(true);
-    }
-
-    public void startGame() {
 
     }
 
-    /*    public GUI() {
-     //intial Frame
-     super("Dots and Boxes");
-    
-     //playboard  und Frame zeichnen
-     this.size = 5;
-     this.rows = size;
-     this.cols = size;
-     boxSize = 550 / cols;
-     paintPlayBoard();
-    
-     //MenuBar
-     setMenuBar();
-    
-     //ActionListner registrieren
-     register();
-    
-     //Sichtbar machen
-     //pack();
-     setVisible(true);
-    
-     }*/
     /**
      * Zeichnet das Spielfeld neu
      */
@@ -194,17 +175,14 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 g.drawImage(icon1, 10, 60, rootPane);
                 g.drawString(player1.getName(), 20, 50);
                 g.drawString("Score: " + player1.getScore(), 20, 220);
-                if(controller.isGameOver()){
-                    if(player1.getScore() > player2.getScore()){
+                if (controller.isGameOver()) {
+                    if (player1.getScore() > player2.getScore()) {
                         g.setColor(Color.red);
                         g.drawString("Winner!", 20, 200);
                     }
-                }
-                else
-                {
-                    
-                    if(player1.getIsActive())
-                    {
+                } else {
+
+                    if (player1.getIsActive()) {
                         g.setColor(Color.red);
                         g.drawString("Is on turn", 20, 200);
                     }
@@ -283,7 +261,6 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                             Color col = gameField.getBoxColor(yrow, xcol);
                             g.setColor(col);
                             Player owner = gameField.getBoxOwner(yrow, xcol);
-                         
 
                             if (player1 == owner) {
 
@@ -336,11 +313,11 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                     Font info = new Font(Font.DIALOG, 1, 40);
                     g.setFont(info);
                     g.setColor(Color.black);
-                    String WinnerName= " ";
+                    String WinnerName = " ";
                     if (player1.getScore() > player2.getScore()) {
-                    WinnerName = player1.getName();
+                        WinnerName = player1.getName();
                     } else {
-                    WinnerName = player2.getName();
+                        WinnerName = player2.getName();
                     }
                     g.drawString("  Winner is: " + WinnerName, 60, 300);
                     placeholder1.repaint();
@@ -367,16 +344,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                 g.drawImage(icon1, 10, 60, rootPane);
                 g.drawString(player2.getName(), 20, 50);
                 g.drawString("Score: " + player2.getScore(), 20, 220);
-                if(controller.isGameOver()){
-                    if(player1.getScore() < player2.getScore()){
+                if (controller.isGameOver()) {
+                    if (player1.getScore() < player2.getScore()) {
                         g.setColor(Color.red);
                         g.drawString("Winner!", 20, 200);
                     }
-                }
-                else
-                {
-                    if(player2.getIsActive())
-                    {
+                } else {
+                    if (player2.getIsActive()) {
                         g.setColor(Color.red);
                         g.drawString("Is on turn", 20, 200);
                     }
@@ -440,8 +414,6 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         this.menuFile.addSeparator();
         this.menuFile.add(miFileExit);
         miFileExit.addActionListener(this);
-        this.menuFile.add(miFileRepaint);
-        miFileRepaint.addActionListener(this);
         this.menuBar.add(menuFile);
 
         //Onlinegame Menu
@@ -465,8 +437,8 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
      */
     private void register() {
 
-        playBoard.addMouseListener(this); 
-       // this.addMouseListener(this); // Versuchen add an Panel
+        playBoard.addMouseListener(this);
+        // this.addMouseListener(this); // Versuchen add an Panel
         //this.addMouseMotionListener(this);
 
     }
@@ -485,7 +457,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     public void mouseClicked(MouseEvent e) {
         int nearx, neary;
         // lookup line nearest to the mouse pointer
-        
+
         getNearest(e.getX(), e.getY());
         System.out.println("mousclickt");
         // pass the event to state machine
@@ -534,9 +506,9 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
     private int getNearest(int x, int y) {
 
         // find the mouse position relative to the field origin
-        x -= (boxSize/6.8);
-        y -= (boxSize/5.05);
-        System.out.println(x +" "+ y);
+        x -= (boxSize / 6.8);
+        y -= (boxSize / 5.05);
+        System.out.println(x + " " + y);
         // mouse is over the box at this row and column
         int col = x / boxSize;
         int row = y / boxSize;
@@ -610,10 +582,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         // New Game menu item was selected
         if (e.getActionCommand().equals("New Game")) {
-            // show modal new game dialog box
-            //newGameDialog.showDialog();
+            newGameDialog = new NewGameDialog(this);
+            // show the dialog
+            newGameDialog.showDialog();
+            newGameDialog.startGame(this.controller);
+
             //new Game
-            this.controller.startGame(2, 4, "Blue", "Red");
+            //this.controller.startGame(2, 4, "Blue", "Red");
         } // How to Play menu item was selected
         else if (e.getActionCommand().equals("Rules")) {
             // show the instructional modal dialog box
@@ -627,11 +602,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         } // Exit menu item was selected
         else if (e.getActionCommand().equals("Exit")) {
             this.dispose();
-        } else if (e.getActionCommand().equals("repaint")) {
-            this.dotColor = Color.ORANGE;
-            this.playBoard.repaint();
-
-        }
+        } 
     }
 
     public void setPlayer(Player player1, Player player2) {
