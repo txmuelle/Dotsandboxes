@@ -6,7 +6,7 @@
  */
 package ch.hslu.prg2.controlling;
 
-import ch.hslu.prg2.logic.RandomKI;
+import ch.hslu.prg2.logic.moreIntelligentKI;
 import ch.hslu.prg2.model.GameField;
 import ch.hslu.prg2.model.Player;
 import ch.hslu.prg2.model.PrintOut;
@@ -25,7 +25,7 @@ public class Controller implements Serializable{
     private GameField gameField;
     private Player player1, player2;
     private transient GameVariant gameVariant;
-    private RandomKI randomKi;
+    private moreIntelligentKI Ki;
     private boolean GameOver;
 
     public Controller() {
@@ -89,8 +89,8 @@ public class Controller implements Serializable{
         if (player1.getScore() + player2.getScore() < Math.pow((gameField.getMatrixSize() - 1) / 2, 2)) {
             if (activePlayer.equals(gui)) {
 
-            } else if (activePlayer.equals(randomKi)) {
-                ArrayList<Integer> coordinates = randomKi.kiMove(gameField);
+            } else if (activePlayer.equals(Ki)) {
+                ArrayList<Integer> coordinates = Ki.kiMove(gameField);
                 move(coordinates.get(0), coordinates.get(1), activePlayer);
             }
             // Einfügen von weiteren Spieler Klassen. z.B. Network Player
@@ -124,18 +124,18 @@ public class Controller implements Serializable{
 
         gameField = new GameField(size);
         gameVariant = new GameVariant(gameModi);
-        randomKi = new RandomKI(gameField);
+        Ki = new moreIntelligentKI(gameField);
         GameOver = false;
         gui = new GUI(this.gameField, this, this.player1, this.player2, this.gameVariant);
         switch (gameModi) {
             case 1:
-                this.player1 = new Player(player1, color1, randomKi, true);
+                this.player1 = new Player(player1, color1, Ki, true);
                 this.player2 = new Player(player2, color2, gui, false);
                 break;
 
             case 2:
                 this.player1 = new Player(player1, color1, gui, true);
-                this.player2 = new Player(player2, color2, randomKi, false);
+                this.player2 = new Player(player2, color2, Ki, false);
                 break;
 
             case 3:
@@ -144,8 +144,8 @@ public class Controller implements Serializable{
                 break;
 
             default:
-                this.player1 = new Player(player1, color1, randomKi, true);
-                this.player2 = new Player(player2, color2, randomKi, false);
+                this.player1 = new Player(player1, color1, Ki, true);
+                this.player2 = new Player(player2, color2, Ki, false);
                 break;
         }
         this.gui.setPlayer(this.player1, this.player2);
@@ -194,8 +194,8 @@ public class Controller implements Serializable{
         return gameVariant;
     }
 
-    public RandomKI getRandomKi() {
-        return randomKi;
+    public moreIntelligentKI getKi() {
+        return Ki;
     }
 
     public void setGui(GUI gui) {
@@ -218,8 +218,8 @@ public class Controller implements Serializable{
         this.gameVariant = gameVariant;
     }
 
-    public void setRandomKi(RandomKI randomKi) {
-        this.randomKi = randomKi;
+    public void setRandomKi(moreIntelligentKI Ki) {
+        this.Ki = Ki;
     }
 
     public void setGameOver(boolean GameOver) {

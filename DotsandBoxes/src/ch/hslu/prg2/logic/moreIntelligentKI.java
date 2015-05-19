@@ -7,7 +7,6 @@ package ch.hslu.prg2.logic;
 
 import ch.hslu.prg2.model.Boxes;
 import ch.hslu.prg2.model.GameField;
-import ch.hslu.prg2.model.Lines;
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -29,11 +28,12 @@ public class moreIntelligentKI {
     
     public ArrayList<Integer> kiMove(GameField incomingGameField){
         
-        setGameField(incomingGameField);
+        this.gamefield = incomingGameField;
         Boxes box = chooseBox(checkBoxes());
         int boxRow = box.getRow();
         int boxColumn = box.getColumn();
         ArrayList<Integer> coordinates = chooseLines(boxRow,boxColumn);
+ 
         return coordinates;
     }
     
@@ -56,7 +56,7 @@ public class moreIntelligentKI {
                            
                            maxPriority.add(box);
                            
-                       }else if (counter!=2){
+                       }else if (counter==0 || counter==1){
                   
                            normalPriority.add(box);
                            
@@ -100,7 +100,7 @@ public class moreIntelligentKI {
         } else {
                 
                 int i = random(minPriority.size());
-                return maxPriority.get(i);
+                return minPriority.get(i);
                 
         }
         
@@ -116,7 +116,7 @@ public class moreIntelligentKI {
     }
     
     private ArrayList<Integer> chooseLines(int boxRow,int boxColumn){
-        Lines [][] linesmatrix = gamefield.getLineMatrix();
+       
         ArrayList<Integer> coordinates = new ArrayList<>();
         
         if(!gamefield.isLineDrawed(boxRow-1, boxColumn)){
@@ -143,9 +143,6 @@ public class moreIntelligentKI {
         return coordinates;
     }
     
-    public void setGameField(GameField gamefield){
-        
-        this.gamefield = gamefield;
-        
-    }
+  
 }
+
