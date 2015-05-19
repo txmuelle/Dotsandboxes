@@ -49,6 +49,7 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
         private int rows;
         private String player1;
         private String player2;
+        private Controller cont;
         
         //Player Name
         private JTextField Player1Field, Player2Field;
@@ -56,7 +57,7 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 	// callback object which receives user's selection
 	//private NewGameParametersCallback callback;
 
-	/**
+	/** 
 	 * Shows the dialog box in the right position over the parent window
 	 */
 	public void showDialog() {
@@ -78,27 +79,27 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 	 * 
 	 * @param args command line parameters (ignored)
 	 */
-	public static void main(String[] args) {
-		// make an invisible toplevel window
-		JFrame frame = new JFrame();
-		// closing the window should dispose of it, allowing VM to exit
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		// show it
-		frame.setSize(400, 300);
-		frame.setVisible(true);
-		// anonymous inline callback
-		NewGameParametersCallback cback = new NewGameParametersCallback() {
-			public void newGameParameters(int vari, int rows, String player1,String player2) {
-				// print out the user's choices
-				System.out.println("NewGameParametersCallback Vari=" + vari
-						+ " rows=" + rows + " player1=" + player1 + " player2=" + player2);
-			}
-		};
-		// make the modal dialog
-		NewGameDialog instance = new NewGameDialog(frame);
-		// show the dialog
-		instance.showDialog();
-	}
+        /*	public static void main(String[] args) {
+        // make an invisible toplevel window
+        JFrame frame = new JFrame();
+        // closing the window should dispose of it, allowing VM to exit
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        // show it
+        frame.setSize(400, 300);
+        frame.setVisible(true);
+        // anonymous inline callback
+        NewGameParametersCallback cback = new NewGameParametersCallback() {
+        public void newGameParameters(int vari, int rows, String player1,String player2) {
+        // print out the user's choices
+        System.out.println("NewGameParametersCallback Vari=" + vari
+        + " rows=" + rows + " player1=" + player1 + " player2=" + player2);
+        }
+        };
+        // make the modal dialog
+        NewGameDialog instance = new NewGameDialog(frame, cont);
+        // show the dialog
+        instance.showDialog();
+        }*/
 
 	/**
 	 * Creates the invisible modal dialog box
@@ -106,9 +107,12 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 	 * @param frame window that owns the dialog
 	 * @param callback callback to receive the new game parameters
 	 */
-	public NewGameDialog(JFrame frame) {
+	public NewGameDialog(JFrame frame, String pl1, String pl2) {
 		// allow the super-class to initialize (JDialog)
 		super(frame);
+                this.cont = cont;
+                this.player1 = pl1;
+                this.player2 = pl2;
 		// save data
 		//this.callback = callback;
 		// set up the dialog
@@ -178,7 +182,7 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 		{// rows spinner
 			this.rowSpinner = new JSpinner();
 			SpinnerNumberModel rowSpinnerModel = new SpinnerNumberModel(
-					DEFAULTROWS, 1, 20, 1);
+					DEFAULTROWS, 2, 20, 1);
 			this.rowSpinner.setModel(rowSpinnerModel);
 
 			GridBagConstraints rowSpinnerConstraints = new GridBagConstraints();
@@ -188,6 +192,71 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 
 			this.getContentPane().add(this.rowSpinner, rowSpinnerConstraints);
 		}
+                
+                {// "Set Names:" label
+			JLabel chooseLabel = new JLabel();
+			chooseLabel.setText("Set Names:");
+			chooseLabel.setLayout(null);
+			chooseLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+			chooseLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+			GridBagConstraints chooseLabelConstraints = new GridBagConstraints();
+			chooseLabelConstraints.gridy = 3;
+			chooseLabelConstraints.gridwidth = 2;
+			chooseLabelConstraints.anchor = GridBagConstraints.WEST;
+			chooseLabelConstraints.ipadx = 10;
+
+			this.getContentPane().add(chooseLabel, chooseLabelConstraints);
+		}
+                {// "Player1: " label
+			JLabel Name1Label = new JLabel();
+			Name1Label.setText("Player1:");
+
+			GridBagConstraints Name1LabelConstraints = new GridBagConstraints();
+			Name1LabelConstraints.gridy = 4;
+			Name1LabelConstraints.anchor = GridBagConstraints.EAST;
+			Name1LabelConstraints.ipadx = 10;
+
+			this.getContentPane().add(Name1Label, Name1LabelConstraints);
+		}
+                {// "Player1:" Textfiled
+                        this.Player1Field = new JTextField();
+                        Player1Field.setText(this.player1);
+                        
+                        GridBagConstraints Player1FieldConstraints = new GridBagConstraints();
+			Player1FieldConstraints.gridy = 4;
+			Player1FieldConstraints.gridwidth = 2;
+			Player1FieldConstraints.anchor = GridBagConstraints.WEST;
+			Player1FieldConstraints.ipadx = 10;
+
+			this.getContentPane().add(Player1Field, Player1FieldConstraints);
+                }
+                
+                {// "Player2: " label
+			JLabel Name2Label = new JLabel();
+			Name2Label.setText("Player2:");
+
+			GridBagConstraints Name2LabelConstraints = new GridBagConstraints();
+			Name2LabelConstraints.gridy = 6;
+			Name2LabelConstraints.anchor = GridBagConstraints.EAST;
+			Name2LabelConstraints.ipadx = 10;
+
+			this.getContentPane().add(Name2Label, Name2LabelConstraints);
+		}
+                
+                {// "Player1:" Textfiled
+                        this.Player2Field = new JTextField();
+                        Player2Field.setText(this.player2);
+                        
+                        GridBagConstraints Player2FieldConstraints = new GridBagConstraints();
+			Player2FieldConstraints.gridy = 6;
+			Player2FieldConstraints.gridwidth = 2;
+			Player2FieldConstraints.anchor = GridBagConstraints.WEST;
+			Player2FieldConstraints.ipadx = 10;
+
+			this.getContentPane().add(Player2Field, Player2FieldConstraints);
+                }
+                
                 {// "Choose Gamevariant:" label
 			JLabel chooseLabel = new JLabel();
 			chooseLabel.setText("Choose Gamevariant:");
@@ -227,69 +296,6 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
                 colSpinnerConstraints.fill = GridBagConstraints.HORIZONTAL;
                 
                 this.getContentPane().add(this.wordList, colSpinnerConstraints);
-                }
-                {// "Set Names:" label
-			JLabel chooseLabel = new JLabel();
-			chooseLabel.setText("Set Names:");
-			chooseLabel.setLayout(null);
-			chooseLabel.setHorizontalTextPosition(SwingConstants.LEADING);
-			chooseLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			GridBagConstraints chooseLabelConstraints = new GridBagConstraints();
-			chooseLabelConstraints.gridy = 3;
-			chooseLabelConstraints.gridwidth = 2;
-			chooseLabelConstraints.anchor = GridBagConstraints.WEST;
-			chooseLabelConstraints.ipadx = 10;
-
-			this.getContentPane().add(chooseLabel, chooseLabelConstraints);
-		}
-                {// "Player1: " label
-			JLabel Name1Label = new JLabel();
-			Name1Label.setText("Player1:");
-
-			GridBagConstraints Name1LabelConstraints = new GridBagConstraints();
-			Name1LabelConstraints.gridy = 4;
-			Name1LabelConstraints.anchor = GridBagConstraints.EAST;
-			Name1LabelConstraints.ipadx = 10;
-
-			this.getContentPane().add(Name1Label, Name1LabelConstraints);
-		}
-                {// "Player1:" Textfiled
-                        this.Player1Field = new JTextField();
-                        Player1Field.setText("Player 1");
-                        
-                        GridBagConstraints Player1FieldConstraints = new GridBagConstraints();
-			Player1FieldConstraints.gridy = 4;
-			Player1FieldConstraints.gridwidth = 2;
-			Player1FieldConstraints.anchor = GridBagConstraints.WEST;
-			Player1FieldConstraints.ipadx = 10;
-
-			this.getContentPane().add(Player1Field, Player1FieldConstraints);
-                }
-                
-                {// "Player2: " label
-			JLabel Name2Label = new JLabel();
-			Name2Label.setText("Player2:");
-
-			GridBagConstraints Name2LabelConstraints = new GridBagConstraints();
-			Name2LabelConstraints.gridy = 6;
-			Name2LabelConstraints.anchor = GridBagConstraints.EAST;
-			Name2LabelConstraints.ipadx = 10;
-
-			this.getContentPane().add(Name2Label, Name2LabelConstraints);
-		}
-                
-                {// "Player1:" Textfiled
-                        this.Player2Field = new JTextField();
-                        Player2Field.setText("Player 2");
-                        
-                        GridBagConstraints Player2FieldConstraints = new GridBagConstraints();
-			Player2FieldConstraints.gridy = 6;
-			Player2FieldConstraints.gridwidth = 2;
-			Player2FieldConstraints.anchor = GridBagConstraints.WEST;
-			Player2FieldConstraints.ipadx = 10;
-
-			this.getContentPane().add(Player2Field, Player2FieldConstraints);
                 }
                                 
 		{// "Start Game" button
@@ -396,7 +402,7 @@ public class NewGameDialog extends javax.swing.JDialog implements ListSelectionL
 
 
     void startGame(Controller controller) {
-        
         controller.startGame(selectet, this.rows, player1, player2);
+        
     }
 }

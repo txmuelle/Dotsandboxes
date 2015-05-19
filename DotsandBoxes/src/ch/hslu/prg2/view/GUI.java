@@ -406,14 +406,19 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
         //File Menu
         this.menuFile.add(miFileNew);
-        miFileNew.addActionListener(this);
+        this.miFileNew.addActionListener(this);
+        this.miFileNew.setMnemonic(java.awt.event.KeyEvent.VK_N);
         this.menuFile.add(miFileLoad);
-        miFileLoad.addActionListener(this);
+        this.miFileLoad.setMnemonic(java.awt.event.KeyEvent.VK_L);
+        this.miFileLoad.addActionListener(this);
         this.menuFile.add(miFileSave);
-        miFileSave.addActionListener(this);
+        this.miFileSave.setMnemonic(java.awt.event.KeyEvent.VK_S);
+        this.miFileSave.addActionListener(this);
         this.menuFile.addSeparator();
         this.menuFile.add(miFileExit);
-        miFileExit.addActionListener(this);
+        this.miFileExit.setMnemonic(java.awt.event.KeyEvent.VK_X);
+        this.miFileExit.addActionListener(this);
+        this.menuFile.setMnemonic(java.awt.event.KeyEvent.VK_F);
         this.menuBar.add(menuFile);
 
         /*//Onlinegame Menu
@@ -425,10 +430,13 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         
         //Help Menu
         this.menuHelp.add(miHelpRules);
-        miHelpRules.addActionListener(this);
+        this.menuHelp.setMnemonic(java.awt.event.KeyEvent.VK_H);
+        this.miHelpRules.setMnemonic(java.awt.event.KeyEvent.VK_R);
+        this.miHelpRules.addActionListener(this);
         this.menuHelp.addSeparator();
         this.menuHelp.add(miHelpAbout);
-        miHelpAbout.addActionListener(this);
+        this.miHelpAbout.setMnemonic(java.awt.event.KeyEvent.VK_A);
+        this.miHelpAbout.addActionListener(this);
         this.menuBar.add(menuHelp);
         setJMenuBar(menuBar);
     }
@@ -506,7 +514,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
         // find the mouse position relative to the field origin
         x -= (boxSize / 6.8);
         y -= (boxSize / 5.05);
-        System.out.println(x + " " + y);
+        //System.out.println(x + " " + y);
         // mouse is over the box at this row and column
         int col = x / boxSize;
         int row = y / boxSize;
@@ -569,7 +577,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             return -1;
         } // Infos an Gamemanager weitergeben
         else {
-            System.out.println("line: " + lineRow + "y  " + lineCol + "x");
+            System.out.println("Gui line: " + lineRow + "y  " + lineCol + "x");
             this.controller.move(lineRow, lineCol, this);
             return 1;
         }
