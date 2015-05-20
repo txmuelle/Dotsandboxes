@@ -7,6 +7,7 @@ package ch.hslu.prg2.view;
 
 import ch.hslu.prg2.controlling.Controller;
 import ch.hslu.prg2.controlling.GameVariant;
+import ch.hslu.prg2.memory.Memory;
 
 import javax.swing.JFrame;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
 
     private GameField gameField;
     private Player player1, player2;
+    private Memory memory;
 
     //Layout MenuBar
     JMenuBar menuBar = new JMenuBar();
@@ -316,7 +318,10 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
                     String WinnerName = " ";
                     if (player1.getScore() > player2.getScore()) {
                         WinnerName = player1.getName();
-                    } else {
+                    }else if(player1.getScore() == player2.getScore()){
+                        WinnerName = "Everyone ^_^";
+                    }
+                    else {
                         WinnerName = player2.getName();
                     }
                     g.drawString("  Winner is: " + WinnerName, 60, 300);
@@ -595,7 +600,18 @@ public class GUI extends JFrame implements MouseInputListener, ActionListener {
             this.dispose();
             //new Game
             //this.controller.startGame(2, 4, "Blue", "Red");
-        } // How to Play menu item was selected
+        }else if (e.getActionCommand().equals("Save Game")) {
+            
+            // = new Memory(this.controller);
+            //memory.saveGame();
+        }//load agme
+        else if (e.getActionCommand().equals("Load Game")) {
+            
+            //this.controller = memory.openGame();
+           // this.controller.startGame(controller.getGameVariant().getModi(),3, controller.getPlayer1().getName(), controller.getPlayer2().getName());
+           // this.dispose();
+        }
+        // How to Play menu item was selected
         else if (e.getActionCommand().equals("Rules")) {
             // show the instructional modal dialog box
             JOptionPane.showMessageDialog(this, HOWTOPLAYTEXT, "How To Play",
