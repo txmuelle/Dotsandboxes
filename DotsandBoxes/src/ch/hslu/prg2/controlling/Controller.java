@@ -30,7 +30,7 @@ public class Controller implements Serializable{
 
     public Controller() {
 
-        startGame(2, 3, "Alois", "Compi");
+        startGame(2, 3, "Spieler 1", "Computer");
     }
 
     /**
